@@ -1,0 +1,90 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Register</title>
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        text-align: center;
+        padding: 30px;
+        }
+
+        form {
+        display: inline-block;
+        background-color: white;
+        padding: 20px 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        input {
+        margin: 10px 0;
+        padding: 10px;
+        width: 250px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        }
+
+        button {
+        padding: 10px 25px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        }
+
+        button:hover {
+        background-color: #218838;
+        }
+
+        h2 {
+        color: #333;
+        }
+
+    </style>
+    </head>
+    <body>
+    <h2>User Register</h2>
+    <form id="registerForm">
+        <input type="text" id="username" placeholder="Username" required><br>
+        <input type="password" id="password" placeholder="Password" required><br>
+        <input type="text" id="mobile" placeholder="Mobile Number" required><br>
+        <input type="email" id="email" placeholder="Email ID" required><br>
+        <button type="submit">Register</button>
+    </form>
+
+    <script>
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const mobile = document.getElementById('mobile').value.trim();
+        const email = document.getElementById('email').value.trim();
+
+        // Check for duplicates
+        const duplicate = users.find(user => 
+            user.username === username || 
+            user.mobile === mobile || 
+            user.email === email
+        );
+
+        if (duplicate) {
+            alert("User with same Username, Mobile or Email already exists!");
+            return;
+        }
+
+        const newUser = { username, password, mobile, email, status: 'inactive', orders: [] };
+        users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(users));
+
+        alert("Registered successfully! Please wait for admin approval.");
+        location.href = "Userlogin.html";
+        });
+    </script>
+    </body>
+    </html>
