@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AW Print Navbar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        
+        .top-navbar {
+            background-color: #d71920;
+            padding: 8px 20px;
+        }
+        .top-navbar img {
+            height: 40px;
+        }
+        .main-navbar {
+            background-color: white;
+            padding: 10px 20px;
+            border-bottom: 2px solid #d71920;
+        }
+        .nav-item .nav-link {
+            color: black;
+            font-weight: bold;
+            padding: 8px 15px;
+        }
+        .nav-item .nav-link:hover {
+            color: #d71920;
+        }
+        .search-box {
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            border-radius: 20px;
+            width: 250px;
+        }
+        .nav-icons i {
+            font-size: 18px;
+            color: #d71920;
+            margin-left: 15px;
+            cursor: pointer;
+        }
+        .cart-badge {
+            position: relative;
+        }
+        .cart-badge span {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background: black;
+            color: white;
+            font-size: 12px;
+            padding: 2px 5px;
+            border-radius: 50%;
+        }
+        /*div gol box css*/
+      
+        .featured-themes {
+            text-align: center;
+            padding: 50px 0;
+        }
+        .theme-card {
+            text-align: center;
+        }
+        .theme-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .theme-title {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .gradient-bg {
+            padding: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .bg1 { background: linear-gradient(45deg, #ff7eb3, #ff758c); }
+        .bg2 { background: linear-gradient(45deg, #70a1ff, #1e90ff); }
+        .bg3 { background: linear-gradient(45deg, #2ed573, #1dd1a1); }
+        .bg4 { background: linear-gradient(45deg, #ff9f43, #ff6b6b); }
+        .bg5 { background: linear-gradient(45deg, #6c5ce7, #a29bfe); }
+        .bg6 { background: linear-gradient(45deg, #f368e0, #ff9ff3); }
+        .bg7 { background: linear-gradient(45deg, #ffb142, #ff4757); }
+        .bg8 { background: linear-gradient(45deg, #34ace0, #33d9b2); }
+        /*div card gird css*/
+        .product-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+        .category-label {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: red;
+            color: white;
+            padding: 5px 10px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .gradient-bg {
+            background: linear-gradient(to bottom, #fff, #f1f1f1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .product-card img {
+    width: 100%;
+    height: auto;
+    min-height: 250px;
+    object-fit: contain; /* पहले cover था, अब contain किया ताकि पूरी इमेज दिखे */
+    border-radius: 10px;
+}
+.product-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 180px; /* Fixed Height for Consistency */
+            object-fit: contain; /* Ensures Full Image Visibility */
+            border-radius: 10px;
+            background: #fff;
+            padding: 10px;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #333;
+        }
+        .custom-card {
+            text-align: center;
+            background: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .custom-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 10px;
+            background: #fff;
+            padding: 10px;
+        }
+
+        .custom-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #333;
+        }
+        /*footer*/
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {}
+        a,
+        a:hover,
+        a:focus,
+        a:active {
+            text-decoration: none;
+            outline: none;
+        }
+        
+        a,
+        a:active,
+        a:focus {
+            color: #333;
+            text-decoration: none;
+            transition-timing-function: ease-in-out;
+            -ms-transition-timing-function: ease-in-out;
+            -moz-transition-timing-function: ease-in-out;
+            -webkit-transition-timing-function: ease-in-out;
+            -o-transition-timing-function: ease-in-out;
+            transition-duration: .2s;
+            -ms-transition-duration: .2s;
+            -moz-transition-duration: .2s;
+            -webkit-transition-duration: .2s;
+            -o-transition-duration: .2s;
+        }
+        
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        img {
+    max-width: 100%;
+    height: auto;
+}
+        section {
+            padding: 60px 0;
+           /* min-height: 100vh;*/
+        }
+.footer {
+    background: linear-gradient(105deg,#6e99e6 ,#093c94);
+    padding-top: 80px;
+    padding-bottom: 40px;
+}
+/*END FOOTER SOCIAL DESIGN*/
+.single_footer{}
+@media only screen and (max-width:768px) { 
+.single_footer{margin-bottom:30px;}
+}
+.single_footer h4 {
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+.single_footer h4::after {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 40px;
+    background: #fff;
+    margin-top: 20px;
+}
+.single_footer p{color:#fff;}
+.single_footer ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.single_footer ul li{}
+.single_footer ul li a {
+    color: #fff;
+    -webkit-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    line-height: 36px;
+    font-size: 15px;
+    text-transform: capitalize;
+}
+.single_footer ul li a:hover { color: #ff3666; }
+
+.single_footer_address{}
+.single_footer_address ul{}
+.single_footer_address ul li{color:#fff;}
+.single_footer_address ul li span {
+    font-weight: 400;
+    color: #fff;
+    line-height: 28px;
+}
+.contact_social ul {
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+
+/*START NEWSLETTER CSS*/
+.subscribe {
+    display: block;
+    position: relative;
+    margin-top: 15px;
+    width: 100%;
+}
+.subscribe__input {
+background-color: #fff;
+border: medium none;
+border-radius: 5px;
+color: #333;
+display: block;
+font-size: 15px;
+font-weight: 500;
+height: 60px;
+letter-spacing: 0.4px;
+margin: 0;
+padding: 0 150px 0 20px;
+text-align: center;
+text-transform: capitalize;
+width: 100%;
+}
+@media only screen and (max-width:768px) { 
+.subscribe__input{padding: 0 50px 0 20px;}
+}
+
+.subscribe__btn {
+background-color: transparent;
+border-radius: 0 25px 25px 0;
+color: #01c7e9;
+cursor: pointer;
+display: block;
+font-size: 20px;
+height: 60px;
+position: absolute;
+right: 0;
+top: 0;
+width: 60px;
+}
+.subscribe__btn i{transition: all 0.3s ease 0s;}
+@media only screen and (max-width:768px) { 
+.subscribe__btn{right:0px;}
+}
+
+.subscribe__btn:hover i{
+    color:#ff3666;
+}
+button {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+/*END NEWSLETTER CSS*/
+
+/*START SOCIAL PROFILE CSS*/
+.social_profile {margin-top:40px;}
+.social_profile ul{
+list-style: outside none none;
+margin: 0;
+padding: 0;
+}
+.social_profile ul li{float:left;}
+.social_profile ul li a {
+    text-align: center;
+    border: 0px;
+    text-transform: uppercase;
+    transition: all 0.3s ease 0s;
+    margin: 0px 5px;
+    font-size: 18px;
+    color: #fff;
+    border-radius: 30px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    display: block;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+@media only screen and (max-width:768px) { 
+.social_profile ul li a{margin-right:10px;margin-bottom:10px;}
+}
+@media only screen and (max-width:480px) { 
+.social_profile ul li a{
+    width:40px;
+    height:40px;
+    line-height:40px;
+}
+}
+.social_profile ul li a:hover{
+background:#ff3666;
+border: 1px solid #ff3666;
+color:#fff;
+border:0px;
+}
+/*END SOCIAL PROFILE CSS*/
+.copyright {
+    margin-top: 70px;
+    padding-top: 40px;
+    color:#fff;
+    font-size: 15px;
+    border-top: 1px solid rgba(255,255,255,0.4);
+    text-align: center;
+}
+.copyright a{color:#01c7e9;transition: all 0.2s ease 0s;}
+.copyright a:hover{color:#ff3666;}
+/*bnear css*/
+.banner-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .banner {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .banner img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .banner:hover {
+            transform: scale(1.02);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            border: 2px solid #5B2870;
+            border-radius: 30px 30px 30px 0;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            transition: 0.3s ease-in-out;
+        }
+
+        .stat-card:hover {
+            background: #5B2870;
+            color: white;
+        }
+
+        .stat-card h2 {
+            color: #E28425;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .stat-card p {
+            font-size: 14px;
+            margin: 5px 0 0;
+        }
+        body {
+            background-color: #f5f5f5;
+        }
+        .card {
+            border: none;
+            transition: transform 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .old-price {
+            text-decoration: line-through;
+            color: gray;
+        }
+        .rating {
+            color: #ff9800;
+        }
+        .cashback {
+            color: green;
+            font-weight: bold;
+        }
+        .buy-btn {
+            background: #ff5733;
+            color: white;
+            transition: background 0.3s;
+        }
+        .buy-btn:hover {
+            background: #c13d1b;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <!-- Top Navbar with Logo -->
+    <div class="top-navbar d-flex align-items-center">
+        <img src="https://files.oaiusercontent.com/file-4UYR1sxhxN5nzamWHcUSpz?se=2025-03-28T09%3A50%3A18Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dc9cfdb79-8610-471a-9123-1510a839ed01.webp&sig=06oOXaHxfTVmWhsMw%2BnBx7cWa6HuzVwxSdaZFAA%2Brf0%3D" alt="AW Print Logo">
+    </div>
+
+    <!-- Main Navbar -->
+    <nav class="main-navbar navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="shopDropdown" role="button" data-bs-toggle="dropdown">SHOP</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">T-Shirts</a></li>
+                            <li><a class="dropdown-item" href="#">Hoodies</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">MEN</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Shirts</a></li>
+                            <li><a class="dropdown-item" href="#">Jeans</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">WOMEN</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Dresses</a></li>
+                            <li><a class="dropdown-item" href="#">Tops</a></li>
+                            
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">ACCESSORIES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">CHARACTERS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">ARTIST MERCH</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="costumersellregstier.html">Sell my prodcuct</a>
+                    </li>
+                </ul>
+
+                <!-- Search Bar -->
+                <input type="text" class="search-box" placeholder="Search for Products, Shows...">
+
+                <!-- Icons -->
+                <div class="nav-icons d-flex align-items-center">
+                    <i class="fas fa-info-circle"></i>
+                    <i class="fas fa-map-marker-alt"></i>
+                    <i class="fas fa-user"></i>
+                    <div class="cart-badge">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="carouselExample" class="carousel slide">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://www.redwolf.in/image/cache/catalog/banners/redwolf-basics-slider-1920-1920x450.jpg?m=1710297025" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="https://www.redwolf.in/image/cache/catalog/sliders/t-shirts-india-slider-1920-1920x450.jpg?m=1710306142" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="https://www.redwolf.in/image/cache/catalog/sliders/oversized-t-shirts-slider-1920-1920x450.jpg?m=1710303019" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <!--div gol box html-->
+      <div class="container featured-themes">
+        <h2 class="fw-bold">FEATURED THEMES</h2>
+        <div class="row mt-4">
+           <a href="allpolo.html"><div class="col-6 col-md-3 theme-card">
+                <div class="gradient-bg bg1">
+                    <img src="https://printo-s3.dietpixels.net/site/2025/M&S%20t-shirts/T-shirt_1740039238.jpg?quality=70&format=webp&w=640" alt="Anime"></a> 
+                </div>
+                <div class="theme-title">polo</div>
+            </div>
+            <div class="col-6 col-md-3 theme-card">
+                <div class="gradient-bg bg2">
+                    <img src="https://www.redwolf.in/image/cache/catalog/featured_categories/featured-theme-superhero-300x300.jpg?m=1706184531" alt="Superhero">
+                </div>
+                <div class="theme-title">SUPERHERO</div>
+            </div>
+            <div class="col-6 col-md-3 theme-card">
+                <div class="gradient-bg bg3">
+                    <img src="https://www.redwolf.in/image/cache/catalog/featured_categories/featured-theme-glow-in-dark-300x300.jpg?m=1706184531" alt="Glow in Dark">
+                </div>
+                <div class="theme-title">GLOW IN DARK</div>
+            </div>
+            <div class="col-6 col-md-3 theme-card">
+                <div class="gradient-bg bg4">
+                    <img src="https://www.redwolf.in/image/cache/catalog/featured_categories/featured-theme-cartoon-300x300.jpg?m=1706184531" alt="Cartoon">
+                </div>
+                <div class="theme-title">CARTOON</div>
+            </div>
+            <div class="col-6 col-md-3 theme-card">
+                <div class="gradient-bg bg5">
+                    <img src="https://www.redwolf.in/image/cache/catalog/featured_categories/featured-theme-slogan-300x300.jpg?m=1706184531" alt="Slogan">
+                </div>
+                <div class="theme-title">SLOGAN</div>
+            </div>
+            <div class="col-6 col-md-3 theme-card">
+                <div class="gradient-bg bg6">
+                    <img src="https://www.redwolf.in/image/cache/catalog/featured_categories/featured-theme-funny-300x300.jpg?m=1706184531" alt="Funny">
+                </div>
+                <div class="theme-title">FUNNY</div>
+            </div>
+            <div class="col-6 col-md-3 theme-card">
+                <div class="gradient-bg bg7">
+                    <img src="https://www.redwolf.in/image/cache/catalog/featured_categories/featured-theme-geek-300x300.jpg?m=1706184531" alt="Geek">
+                </div>
+                <div class="theme-title">GEEK</div>
+            </div>
+            <div class="col-6 col-md-3 theme-card">
+                <div class="gradient-bg bg8">
+                    <img src="https://www.redwolf.in/image/cache/catalog/featured_categories/featured-theme-funky-300x300.jpg?m=1706184531" alt="Funky">
+                </div>
+                <div class="theme-title">FUNKY</div>
+            </div>
+        </div>
+    </div>
+    
+<div class="container py-5">
+    <h2 class="text-center fw-bold mb-4">FEATURED CATEGORIES</h2>
+    <div class="row g-4">
+        <div class="col-6 col-md-3">
+            <div class="product-card gradient-bg">
+                <img src="coversell.html" alt="Mobile Covers">
+                <div class="category-label">MOBILE COVERS</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="product-card gradient-bg">
+                <img src="https://www.redwolf.in/image/cache/catalog/featured_categories/featured-category-coasters-23-480x480.jpg?m=1706184531" alt="Coasters">
+                <div class="category-label">COASTERS</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="product-card gradient-bg">
+               <a href="mugpage.html"><img src="https://www.redwolf.in/image/cache/catalog/featured_categories/featured-category-mugs-24-480x480.jpg?m=1726843991" alt="Socks">
+                <div class="category-label">MUGS</div></a> 
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="product-card gradient-bg">
+                <img src="https://www.redwolf.in/image/cache/catalog/featured_categories/oversized-t-shirts-india-featured-480x480.jpg?m=1709881172" alt="T-Shirts">
+                <div class="category-label">T-SHIRTS</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="product-card gradient-bg">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFiHMb2Wr0D4VQboXO81Wm5tH6lW1lzLxbGw&s" alt="Posters">
+                <div class="category-label">programing t Shirts</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="product-card gradient-bg">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbV9tq9J8flGiyQq5EEwLxmoguT6UARTvd0ecUJPEm3uRxf6mxqxPyQaHfgaLcgbatrgg&usqp=CAU" alt="Baseball Caps">
+                <div class="category-label">BASEBALL CAPS</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="product-card gradient-bg">
+                <img src="https://via.placeholder.com/250" alt="Face Masks">
+                <div class="category-label">FACE MASKS</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="product-card gradient-bg">
+                <img src="https://printo-s3.dietpixels.net/site/2025/Embellishment%20Products/Dr_1741438972.jpg?quality=70&format=webp&w=384" alt="Sweatshirts">
+                <div class="category-label">SWEATSHIRTS</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container py-5">
+    <h2 class="text-center fw-bold mb-4">Popular Products</h2>
+    <div class="row g-4">
+        <div class="col-6 col-md-3">
+            <div class="product-card">
+                <img src="https://printo-s3.dietpixels.net/site/20230704_133220599691_2fac88_Business-cards.jpg?quality=70&format=webp&w=384" alt="Business Cards">
+                <div class="product-title">Business Cards</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="product-card">
+                <img src="https://printo-s3.dietpixels.net/site/20230701_190929027821_46f69a_T-shirts.jpg?quality=70&format=webp&w=384" alt="Apparel">
+                <div class="product-title">Apparel</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="product-card">
+                <img src="https://printo-s3.dietpixels.net/Untitled-1_1736447652.jpg?quality=70&format=webp&w=384" alt="Corporate Gifts">
+                <div class="product-title">Corporate Gifts</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="product-card">
+                <img src="https://printo-s3.dietpixels.net/site/20230701_190944751783_42d809_Drinkwares.jpg?quality=70&format=webp&w=384" alt="Drinkware">
+                <div class="product-title">Drinkware</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="product-card">
+                <img src="https://printo-s3.dietpixels.net/site/Home%20page/Popular%20products/pop_1709110533.jpg?quality=70&format=webp&w=384" alt="Mailer Boxes">
+                <div class="product-title">Mailer Boxes</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="product-card">
+                <img src="https://printo-s3.dietpixels.net/site/Home%20page/popular%20category/Awards_1709024758.jpg?quality=70&format=webp&w=384" alt="Awards">
+                <div class="product-title">Awards</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="product-card">
+                <img src="https://printo-s3.dietpixels.net/site/20230701_191006462208_002e97_Stickers-new.jpg?quality=70&format=webp&w=384" alt="Stickers">
+                <div class="product-title">Stickers</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="product-card">
+                <img src="https://printo-s3.dietpixels.net/site/20230710_184231277177_73614a_Name-plates.jpg?quality=70&format=webp&w=384" alt="Name Plates">
+                <div class="product-title">Name Plates</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="product-card">
+                <img src="https://printo-s3.dietpixels.net/site/20230704_173714441978_e6a257_Backpack.jpg?quality=70&format=webp&w=384" alt="Backpacks">
+                <div class="product-title">Backpacks</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="product-card">
+                <img src="https://printo-s3.dietpixels.net/site/20231103_181113759584_5474cf_labels-new.jpg?quality=70&format=webp&w=384" alt="Labels">
+                <div class="product-title">Labels</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="product-card">
+                <img src="https://via.placeholder.com/180" alt="Courier Poly Bag">
+                <div class="product-title">Courier Poly Bag</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="product-card">
+                <img src="https://printo-s3.dietpixels.net/site/Home%20page/popular%20category/Poster_1709024357.jpg?quality=70&format=webp&w=384" alt="Posters">
+                <div class="product-title">Posters</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container py-5">
+    <h2 class="text-center fw-bold mb-4">Photo Gifts</h2>
+    <div class="row">
+        <div class="col-md-3 col-sm-6">
+            <div class="custom-card">
+                <img src="https://printo-s3.dietpixels.net/site/2024/Business%20cards/Acrylic-Photo-Prints_1735299670.jpg?quality=70&format=webp&w=384" alt="Acrylic Photo Prints">
+                <div class="product-title">Acrylic Photo Prints</div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="custom-card">
+                <img src="https://printo-s3.dietpixels.net/site/2024/Water%20activated%20tapes/Untitled-1_1737462107.png?quality=70&format=webp&w=384" alt="Photo Prints">
+                <div class="product-title">Photo Prints</div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="custom-card">
+                <img src="https://printo-s3.dietpixels.net/site/2024/Business%20cards/Posters_1735299587.jpg?quality=70&format=webp&w=384" alt="Posters">
+                <div class="product-title">Posters</div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="custom-card">
+                <img src="https://printo-s3.dietpixels.net/site/2024/Business%20cards/Photo-Frame_1735299670.jpg?quality=70&format=webp&w=384" alt="Photo Frames">
+                <div class="product-title">Photo Frames</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container py-5">
+    <h2 class="text-center fw-bold mb-4">Photo Gifts</h2>
+    <div class="row">
+        <div class="col-md-3 col-sm-6">
+            <div class="custom-card">
+                <img src="https://printo-s3.dietpixels.net/site/2024/Business%20cards/Photo-book_1735299670.jpg?quality=70&format=webp&w=384" alt="Acrylic Photo Prints">
+                <div class="product-title">Acrylic Photo Prints</div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="custom-card">
+                <img src="https://printo-s3.dietpixels.net/site/2024/Business%20cards/invitation_1735299670.jpg?quality=70&format=webp&w=384" alt="Photo Prints">
+                <div class="product-title">Photo Prints</div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="custom-card">
+                <img src="https://printo-s3.dietpixels.net/site/2024/Business%20cards/Greeting-card_1735299670.jpg?quality=70&format=webp&w=384" alt="Posters">
+                <div class="product-title">Posters</div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="custom-card">
+                <img src="https://printo-s3.dietpixels.net/site/2024/Business%20cards/Photo-Mug_1735299670.jpg?quality=70&format=webp&w=384" alt="Photo Frames">
+                <div class="product-title">Photo Frames</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- benar html-->
+<div class="container">
+    <div class="banner-container">
+        <div class="banner">
+            <img src="https://printo-s3.dietpixels.net/site/Home%20page/WFH-Gifts_Dropship_Main-Banner-1_1200-x-300pixels_1710412786.jpg?quality=70&format=webp&w=1920" alt="Store Banner">
+        </div>
+       
+    </div>
+</div>
+        
+
+    <div class="container py-5">
+        <div class="row g-4">
+            <div class="col-md-4 col-lg-3">
+                <div class="card shadow-sm">
+                    <img src="https://yp-media.s3.ap-south-1.amazonaws.com/Designs_Inners_and_Outers/Caps/cap_basic_pat_d34_o.jpg" class="card-img-top" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h6 class="card-title">Navy Blue Oversized Hip Hop Tee</h6>
+                        <p class="rating">★★★★★</p>
+                        <p class="card-text fw-bold text-danger">₹579 <span class="old-price">₹1,158</span></p>
+                        <p class="cashback">Cashback of ₹58</p>
+                        <a href="#" class="btn buy-btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="card shadow-sm">
+                    <img src="https://yp-media.s3.ap-south-1.amazonaws.com/Designs_Inners_and_Outers/Mugs/mug_full_print_pat_d8_o.jpg" class="card-img-top" alt="Product 2">
+                    <div class="card-body text-center">
+                        <h6 class="card-title">Cotton Jogger Track Pant</h6>
+                        <p class="rating">★★★★☆</p>
+                        <p class="card-text fw-bold text-danger">₹649 <span class="old-price">₹1,854</span></p>
+                        <p class="cashback">Cashback of ₹65</p>
+                        <a href="#" class="btn buy-btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="card shadow-sm">
+                    <img src="https://yp-media.s3.amazonaws.com/Designs_Inners_and_Outers/Luggage_Tags/luggage_tag_vl_pat_d22_o.jpg" class="card-img-top" alt="Product 3">
+                    <div class="card-body text-center">
+                        <h6 class="card-title">Burgundy Gold Marble Notebook</h6>
+                        <p class="rating">★★★☆☆</p>
+                        <p class="card-text fw-bold text-danger">₹199 <span class="old-price">₹442</span></p>
+                        <p class="cashback">Cashback of ₹20</p>
+                        <a href="#" class="btn buy-btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="card shadow-sm">
+                    <img src="https://www.yourprint.in/wp-content/uploads/2024/01/navy-blue-3-247x296.jpg" class="card-img-top" alt="Product 4">
+                    <div class="card-body text-center">
+                        <h6 class="card-title">Custom Beer Mug</h6>
+                        <p class="rating">★★★★★</p>
+                        <p class="card-text fw-bold text-danger">₹349 <span class="old-price">₹997</span></p>
+                        <p class="cashback">Cashback of ₹35</p>
+                        <a href="#" class="btn buy-btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ <!--new div-->
+ <div class="container py-5">
+    <div class="row g-4">
+        <div class="col-md-4 col-lg-3">
+            <div class="card shadow-sm">
+                <img src="https://www.yourprint.in/wp-content/uploads/2022/07/Neon_o1-247x296.jpg" class="card-img-top" alt="Product 1">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Navy Blue Oversized Hip Hop Tee</h6>
+                    <p class="rating">★★★★★</p>
+                    <p class="card-text fw-bold text-danger">₹579 <span class="old-price">₹1,158</span></p>
+                    <p class="cashback">Cashback of ₹58</p>
+                    <a href="#" class="btn buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+            <div class="card shadow-sm">
+                <img src="https://yp-media.s3.amazonaws.com/yP-mplace/Clocks/YPB0BZ5WSP31_o.jpg" class="card-img-top" alt="Product 2">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Cotton Jogger Track Pant</h6>
+                    <p class="rating">★★★★☆</p>
+                    <p class="card-text fw-bold text-danger">₹649 <span class="old-price">₹1,854</span></p>
+                    <p class="cashback">Cashback of ₹65</p>
+                    <a href="#" class="btn buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+            <div class="card shadow-sm">
+                <img src="https://yp-media.s3.amazonaws.com/yP-mplace/Presentation_Folders/YPB08JH9K39T_o.jpg" class="card-img-top" alt="Product 3">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Burgundy Gold Marble Notebook</h6>
+                    <p class="rating">★★★☆☆</p>
+                    <p class="card-text fw-bold text-danger">₹199 <span class="old-price">₹442</span></p>
+                    <p class="cashback">Cashback of ₹20</p>
+                    <a href="thsrit1.html" class="btn buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+            <div class="card shadow-sm">
+                <img src="https://yp-media.s3.amazonaws.com/Designs_Inners_and_Outers/Bags/tote_bag_pat_d99_o.jpg" class="card-img-top" alt="Product 4">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Custom Beer Mug</h6>
+                    <p class="rating">★★★★★</p>
+                    <p class="card-text fw-bold text-danger">₹349 <span class="old-price">₹997</span></p>
+                    <p class="cashback">Cashback of ₹35</p>
+                    <a href="#" class="btn buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--div 3-->
+<div class="container py-5">
+    <div class="row g-4">
+        <div class="col-md-4 col-lg-3">
+            <div class="card shadow-sm">
+                <img src="https://www.yourprint.in/wp-content/uploads/2022/02/oversized-navy-blue-247x296.jpg" class="card-img-top" alt="Product 1">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Navy Blue Oversized Hip Hop Tee</h6>
+                    <p class="rating">★★★★★</p>
+                    <p class="card-text fw-bold text-danger">₹579 <span class="old-price">₹1,158</span></p>
+                    <p class="cashback">Cashback of ₹58</p>
+                    <a href="#" class="btn buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+            <div class="card shadow-sm">
+                <img src="https://www.yourprint.in/wp-content/uploads/2018/07/beer-mug-outer-1-247x296.png" class="card-img-top" alt="Product 2">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Cotton Jogger Track Pant</h6>
+                    <p class="rating">★★★★☆</p>
+                    <p class="card-text fw-bold text-danger">₹649 <span class="old-price">₹1,854</span></p>
+                    <p class="cashback">Cashback of ₹65</p>
+                    <a href="#" class="btn buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+            <div class="card shadow-sm">
+                <img src="https://yp-media.s3.amazonaws.com/Designs_Inners_and_Outers/Tshirts/Men/tshirt_hs_oversized_men_pat_d14_o.jpg" class="card-img-top" alt="Product 3">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Burgundy Gold Marble Notebook</h6>
+                    <p class="rating">★★★☆☆</p>
+                    <p class="card-text fw-bold text-danger">₹199 <span class="old-price">₹442</span></p>
+                    <p class="cashback">Cashback of ₹20</p>
+                    <a href="#" class="btn buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+            <div class="card shadow-sm">
+                <img src="https://yp-media.s3.amazonaws.com/Designs_Inners_and_Outers/Tshirts/Men/tshirt_hs_men_pat_d160_o.jpg" class="card-img-top" alt="Product 4">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Custom Beer Mug</h6>
+                    <p class="rating">★★★★★</p>
+                    <p class="card-text fw-bold text-danger">₹349 <span class="old-price">₹997</span></p>
+                    <p class="cashback">Cashback of ₹35</p>
+                    <a href="#" class="btn buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--div 4-->
+<div class="container py-5">
+    <div class="row g-4">
+        <div class="col-md-4 col-lg-3">
+            <div class="card shadow-sm">
+                <img src="https://yp-media.s3.ap-south-1.amazonaws.com/Designs_Inners_and_Outers/Mugs/mug_basic_pat_d1_o.jpg" class="card-img-top" alt="Product 1">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Navy Blue Oversized Hip Hop Tee</h6>
+                    <p class="rating">★★★★★</p>
+                    <p class="card-text fw-bold text-danger">₹579 <span class="old-price">₹1,158</span></p>
+                    <p class="cashback">Cashback of ₹58</p>
+                    <a href="#" class="btn buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+            <div class="card shadow-sm">
+                <img src="https://www.yourprint.in/wp-content/uploads/2018/11/WSM1-247x296.jpg" class="card-img-top" alt="Product 2">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Cotton Jogger Track Pant</h6>
+                    <p class="rating">★★★★☆</p>
+                    <p class="card-text fw-bold text-danger">₹649 <span class="old-price">₹1,854</span></p>
+                    <p class="cashback">Cashback of ₹65</p>
+                    <a href="#" class="btn buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+            <div class="card shadow-sm">
+                <img src="https://yp-media.s3.amazonaws.com/yP-mplace/Shirts/Mens_Shirts/YPB09PRNW3Q9_o.jpg" class="card-img-top" alt="Product 3">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Burgundy Gold Marble Notebook</h6>
+                    <p class="rating">★★★☆☆</p>
+                    <p class="card-text fw-bold text-danger">₹199 <span class="old-price">₹442</span></p>
+                    <p class="cashback">Cashback of ₹20</p>
+                    <a href="#" class="btn buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+            <div class="card shadow-sm">
+                <img src="https://yp-media.s3.ap-south-1.amazonaws.com/Designs_Inners_and_Outers/Mugs/mug_basic_pat_d45_o.jpg" class="card-img-top" alt="Product 4">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Custom Beer Mug</h6>
+                    <p class="rating">★★★★★</p>
+                    <p class="card-text fw-bold text-danger">₹349 <span class="old-price">₹997</span></p>
+                    <p class="cashback">Cashback of ₹35</p>
+                    <a href="#" class="btn buy-btn">Buy Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="stats-container">
+        <div class="stat-card">
+            <h2>1M+</h2>
+            <p>Happy Clients</p>
+        </div>
+        <div class="stat-card">
+            <h2>15,000+</h2>
+            <p>Personalized Print Products</p>
+        </div>
+        <div class="stat-card">
+            <h2>17 Years</h2>
+            <p>of Service Excellence</p>
+        </div>
+        <div class="stat-card">
+            <h2>25+</h2>
+            <p>Stores across 6 Cities</p>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="container">     
+        <div class="row">                       
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+                <div class="single_footer">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Lorem Ipsum</a></li>
+                        <li><a href="#">Simply dummy text</a></li>
+                        <li><a href="#">The printing and typesetting </a></li>
+                        <li><a href="#">Standard dummy text</a></li>
+                        <li><a href="#">Type specimen book</a></li>
+                    </ul>
+                </div>
+            </div><!--- END COL --> 
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="single_footer single_footer_address">
+                    <h4>Page Link</h4>
+                    <ul>
+                        <li><a href="#">Lorem Ipsum</a></li>
+                        <li><a href="#">Simply dummy text</a></li>
+                        <li><a href="#">The printing and typesetting </a></li>
+                        <li><a href="#">Standard dummy text</a></li>
+                        <li><a href="t2page.html">Type specimen book</a></li>
+                        <li><a href="allmangepenal.html">admin penal</a></li>
+                    </ul>
+                </div>
+            </div><!--- END COL -->
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="single_footer single_footer_address">
+                    <h4>Subscribe today</h4>
+                    <div class="signup_form">                           
+                        <form action="#" class="subscribe">
+                            <input type="text" class="subscribe__input" placeholder="Enter Email Address">
+                            <button type="button" class="subscribe__btn"><i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <div class="social_profile">
+                    <ul>
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                </div>                          
+            </div><!--- END COL -->         
+        </div><!--- END ROW --> 
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <p class="copyright">Copyright © 2019 <a href="#">Akdesign</a>.</p>
+            </div><!--- END COL -->                 
+        </div><!--- END ROW -->                 
+    </div><!--- END CONTAINER -->
+</div>
+</body>
+</html>
