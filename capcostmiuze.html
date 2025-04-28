@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cap Customization</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #f5f5f5;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 20px;
+    }
+
+    .left-panel {
+      flex: 1;
+      min-width: 300px;
+      background: #fff;
+      margin-right: 20px;
+      text-align: center;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .left-panel img {
+      width: 300px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    #uploadedImagePreview img {
+      margin-top: 10px;
+      max-width: 100px;
+      border: 1px solid #ccc;
+      padding: 5px;
+    }
+
+    .right-panel {
+      flex: 1;
+      min-width: 300px;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .option-block {
+      margin-bottom: 20px;
+    }
+
+    .option-block label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .option-block input[type="text"],
+    .option-block input[type="file"],
+    .option-block input[type="color"] {
+      padding: 8px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .btn {
+      background: purple;
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+      margin-right: 10px;
+    }
+
+    .btn:hover {
+      background: darkmagenta;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Left Panel -->
+  <div class="left-panel">
+    <h3>Your Cap Preview</h3>
+    <img src="https://printo-s3.dietpixels.net/site/2024/Leatherette%20Acrylic%20Frame/Cap_1721130625.jpg?quality=70&format=webp&w=640" alt="Cap Preview" id="capPreviewImg" />
+    <p style="font-size: 14px; color: gray;">Note: Your design will appear on the cap.</p>
+    <div id="uploadedImagePreview"></div>
+  </div>
+
+  <!-- Right Panel -->
+  <div class="right-panel">
+    <h3>Customize Your Cap</h3>
+
+    <div class="option-block">
+      <label for="capColor">Cap Color</label>
+      <input type="color" id="capColor" value="#ffffff">
+    </div>
+
+    <div class="option-block">
+      <label for="text">Add Text</label>
+      <input type="text" id="text" placeholder="Your Name or Message">
+    </div>
+
+    <div class="option-block">
+      <label for="upload">Upload Image/Logo</label>
+      <input type="file" id="upload" onchange="showUploadedImage(event)">
+    </div>
+
+    <div class="option-block">
+      <label for="textColor">Select Text Color</label>
+      <input type="color" id="textColor" value="#000000">
+    </div>
+
+    <div class="option-block">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" placeholder="Customer Name">
+    </div>
+
+    <div class="option-block">
+      <label for="mobile">Mobile Number</label>
+      <input type="text" id="mobile" placeholder="10-digit Mobile No.">
+    </div>
+
+    <div class="option-block">
+      <label for="address">Address</label>
+      <input type="text" id="address" placeholder="Full Delivery Address">
+    </div>
+
+    <button class="btn" onclick="saveOrderAndRedirect()">Save Design & Go to Payment</button>
+  </div>
+</div>
+
+<script>
+  function generateOrderNumber() {
+    return "ORD" + Math.floor(Math.random() * 1000000);
+  }
+
+  function generateCapId() {
+    return "CAP" + Date.now();
+  }
+
+  function showUploadedImage(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const preview = document.getElementById("uploadedImagePreview");
+        preview.innerHTML = `<img src="${e.target.result}" alt="Uploaded Logo">`;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  function saveOrderAndRedirect() {
+    const text = document.getElementById("text").value;
+    const textColor = document.getElementById("textColor").value;
+    const capColor = document.getElementById("capColor").value;
+    const name = document.getElementById("name").value;
+    const mobile = document.getElementById("mobile").value;
+    const address = document.getElementById("address").value;
+    const orderNumber = generateOrderNumber();
+    const capId = generateCapId();
+
+    const orderData = {
+      capId,
+      orderNumber,
+      name,
+      mobile,
+      address,
+      text,
+      color: textColor,
+      capColor
+    };
+
+    localStorage.setItem("capOrder", JSON.stringify(orderData));
+
+    // Redirect to payment.html without alert
+    window.location.href = "https://pages.razorpay.com/stores/st_QHGlA9UFr8KZXa/checkout";
+  }
+</script>
+
+</body>
+</html>
