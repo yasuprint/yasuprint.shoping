@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel - Cap Orders</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #f4f4f4;
+    }
+
+    .admin-container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    th {
+      background-color: purple;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f2f2f2;
+    }
+
+    .no-orders {
+      text-align: center;
+      color: gray;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="admin-container">
+  <h2>All Cap Orders</h2>
+  <div id="orders-container">
+    <table id="orders-table" style="display: none;">
+      <thead>
+        <tr>
+          <th>Customer Name</th>
+          <th>Mobile</th>
+          <th>Address</th>
+          <th>Text</th>
+          <th>Text Color</th>
+        </tr>
+      </thead>
+      <tbody id="orders-body"></tbody>
+    </table>
+    <p class="no-orders" id="no-orders">No orders found.</p>
+  </div>
+</div>
+
+<script>
+  // Load order from localStorage
+  const order = JSON.parse(localStorage.getItem("capOrder"));
+  const table = document.getElementById("orders-table");
+  const tbody = document.getElementById("orders-body");
+  const noOrders = document.getElementById("no-orders");
+
+  if (order) {
+    table.style.display = "table";
+    noOrders.style.display = "none";
+
+    const row = `
+      <tr>
+        <td>${order.name}</td>
+        <td>${order.mobile}</td>
+        <td>${order.address}</td>
+        <td>${order.text}</td>
+        <td><span style="color:${order.color}">${order.color}</span></td>
+      </tr>
+    `;
+    tbody.innerHTML = row;
+  }
+</script>
+
+</body>
+</html>
