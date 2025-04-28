@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      padding: 30px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    table {
+      width: 95%;
+      margin: auto;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #28a745;
+      color: white;
+    }
+
+    select, button {
+      padding: 8px 12px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .status-active {
+      color: green;
+      font-weight: bold;
+    }
+
+    .status-inactive {
+      color: red;
+      font-weight: bold;
+    }
+
+    .orders-box {
+      text-align: left;
+      padding-left: 10px;
+      font-size: 14px;
+    }
+
+    .orders-box ul {
+      padding-left: 20px;
+      margin: 5px 0;
+    }
+
+    .password-toggle {
+      font-size: 13px;
+      color: blue;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Admin Panel - User Details & Activities</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Mobile</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Status</th>
+        <th>Change Status</th>
+        <th>Orders</th>
+      </tr>
+    </thead>
+    <tbody id="userList"></tbody>
+  </table>
+
+  <script>
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+
+    // Dummy users if none exist
+    if (users.length === 0) {
+      users = [
+        {
+          username: "rahul",
+          password: "123456",
+          mobile: "9876543210",
+          email: "rahul@example.com",
+          status: "inactive",
+          orders: ["T-shirt Black - ₹499", "Mug Printed - ₹299"]
+        },
+        {
+          username: "pooja",
+          password: "pass789",
+          mobile: "9123456780",
+          email: "pooja@example.com",
+          status: "active",
+          orders: ["Polo White - ₹599"]
+        }
+      ];
+      localStorage.setItem('users', JSON.stringify(users));
+    }
+
+    function renderUsers() {
+      const userList = document.getElementById('userList');
+      userList.innerHTML = "";
+      users.forEach((user, index) => {
+        userList.innerHTML += `
+          <tr>
+            <td>${user.username}</td>
+            <td>${user.mobile || '-'}</td>
+            <td>${user.email || '-'}</td>
+            <td>
+              <span id="pass-${index}">••••••</span>
+              <span class="password-toggle" onclick="togglePassword(${index})">Show</span>
+            </td>
+            <td class="${user.status === 'active' ? 'status-active' : 'status-inactive'}">
+              ${user.status.toUpperCase()}
+            </td>
+            <td>
+              <select onchange="updateStatus(${index}, this.value)">
+                <option value="active" ${user.status === 'active' ? 'selected' : ''}>Active</option>
+                <option value="inactive" ${user.status === 'inactive' ? 'selected' : ''}>Inactive</option>
+              </select>
+            </td>
+            <td class="orders-box">
+              ${user.orders && user.orders.length > 0 ? 
+                `<ul>${user.orders.map(item => `<li>${item}</li>`).join('')}</ul>` : 'No orders'}
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function updateStatus(index, status) {
+      users[index].status = status;
+      localStorage.setItem('users', JSON.stringify(users));
+      renderUsers();
+    }
+
+    function togglePassword(index) {
+      const passSpan = document.getElementById(`pass-${index}`);
+      const user = users[index];
+      if (passSpan.innerText === "••••••") {
+        passSpan.innerText = user.password;
+      } else {
+        passSpan.innerText = "••••••";
+      }
+    }
+
+    renderUsers();
+  </script>
+</body>
+</html>
