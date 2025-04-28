@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Editable Orders & Products</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
+        .sidebar { width: 200px; height: 100vh; background-color: #333; color: white; position: fixed; padding: 20px; }
+        .sidebar button { display: block; width: 100%; padding: 10px; margin: 5px 0; background: #444; color: white; border: none; cursor: pointer; }
+        .sidebar button:hover { background: #666; }
+        .panel { margin-left: 220px; padding: 20px; display: none; background: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+        table { width: 100%; border-collapse: collapse; background: white; }
+        th, td { padding: 10px; border: 1px solid #ddd; text-align: center; }
+        .edit-btn { cursor: pointer; color: red; text-decoration: underline; background: none; border: none; }
+        input, select, button { padding: 10px; margin: 5px; width: 100%; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <button onclick="showPanel('order-panel')">📦 Order Panel</button>
+        <button onclick="showPanel('product-panel')">🛍️ Product Panel</button>
+    </div>
+
+    <!-- Order Panel -->
+    <div id="order-panel" class="panel">
+        <h1>📦 Order Panel</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Product ID</th>
+                    <th>Item Name</th>
+                    <th>Price</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="order-table-body"></tbody>
+        </table>
+        <h2>Add Order</h2>
+        <input type="text" id="order-id" placeholder="Order ID">
+        <select id="order-product" onchange="updateProductDetails()">
+            <option value="">Select Product</option>
+        </select>
+        <input type="text" id="order-price" placeholder="Price" readonly>
+        <input type="text" id="order-customer" placeholder="Customer Name">
+        <input type="date" id="order-date">
+        <select id="order-status">
+            <option value="pending">Pending</option>
+            <option value="shipped">Shipped</option>
+            <option value="delivered">Delivered</option>
+        </select>
+        <button onclick="addOrder()">Add Order</button>
+    </div>
+
+    <!-- Product Panel -->
+    <div id="product-panel" class="panel">
+        <h1>🛍️ Product Panel</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="product-table-body"></tbody>
+        </table>
+        <h2>Add Product</h2>
+        <input type="text" id="product-id" placeholder="Product ID">
+        <input type="text" id="product-name" placeholder="Product Name">
+        <input type="number" id="product-price" placeholder="Price">
+        <button onclick="addProduct()">Add Product</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            loadOrders();
+            loadProducts();
+        });
+
+        function showPanel(panelId) {
+            document.querySelectorAll(".panel").forEach(panel => {
+                panel.style.display = "none";
+            });
+            document.getElementById(panelId).style.display = "block";
+        }
+
+        function loadOrders() {
+            const orders = JSON.parse(localStorage.getItem("orders")) || [];
+            document.getElementById("order-table-body").innerHTML = orders.map((order, index) => `
+                <tr>
+                    <td>${order.id}</td>
+                    <td>${order.productId}</td>
+                    <td>${order.name}</td>
+                    <td>${order.price}</td>
+                    <td>${order.customer}</td>
+                    <td>${order.date}</td>
+                    <td>${order.status}</td>
+                    <td><button class="edit-btn" onclick="deleteOrder(${index})">Delete</button></td>
+                </tr>
+            `).join("");
+        }
+
+        function addOrder() {
+            const selectedProduct = document.getElementById("order-product");
+            if (!selectedProduct.value) {
+                alert("Please select a product!");
+                return;
+            }
+            const newOrder = {
+                id: document.getElementById("order-id").value,
+                productId: selectedProduct.value,
+                name: selectedProduct.options[selectedProduct.selectedIndex].text,
+                price: document.getElementById("order-price").value,
+                customer: document.getElementById("order-customer").value,
+                date: document.getElementById("order-date").value,
+                status: document.getElementById("order-status").value
+            };
+            let orders = JSON.parse(localStorage.getItem("orders")) || [];
+            orders.push(newOrder);
+            localStorage.setItem("orders", JSON.stringify(orders));
+            loadOrders();
+        }
+
+        function deleteOrder(index) {
+            let orders = JSON.parse(localStorage.getItem("orders")) || [];
+            orders.splice(index, 1);
+            localStorage.setItem("orders", JSON.stringify(orders));
+            loadOrders();
+        }
+
+        function addProduct() {
+            let products = JSON.parse(localStorage.getItem("products")) || [];
+            const newProduct = {
+                id: document.getElementById("product-id").value,
+                name: document.getElementById("product-name").value,
+                price: document.getElementById("product-price").value
+            };
+            products.push(newProduct);
+            localStorage.setItem("products", JSON.stringify(products));
+            loadProducts();
+        }
+
+        function loadProducts() {
+            const products = JSON.parse(localStorage.getItem("products")) || [];
+            document.getElementById("product-table-body").innerHTML = products.map(product => `
+                <tr>
+                    <td>${product.id}</td>
+                    <td>${product.name}</td>
+                    <td>${product.price}</td>
+                </tr>
+            `).join("");
+
+            const productDropdown = document.getElementById("order-product");
+            productDropdown.innerHTML = '<option value="">Select Product</option>';
+            products.forEach(product => {
+                productDropdown.innerHTML += `<option value="${product.id}">${product.name}</option>`;
+            });
+        }
+
+        function updateProductDetails() {
+            const products = JSON.parse(localStorage.getItem("products")) || [];
+            const selectedProduct = document.getElementById("order-product").value;
+            const product = products.find(p => p.id === selectedProduct);
+            document.getElementById("order-price").value = product ? product.price : "";
+        }
+    </script>
+</body>
+</html>
