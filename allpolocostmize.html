@@ -1,0 +1,148 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Custom T-Shirt Designer</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <style>
+    body { background: #f8f9fa; font-family: sans-serif; }
+    .tshirt-card { border: 1px solid #ddd; border-radius: 10px; padding: 15px; background: white; }
+    .tshirt-img, #previewImage { width: 100%; height: 300px; object-fit: contain; }
+    .custom-text, .uploaded-image { position: absolute; transform: translate(-50%, -50%); }
+    .custom-text { top: 50%; left: 50%; font-size: 22px; font-weight: bold; }
+    .uploaded-image { top: 30%; left: 50%; width: 100px; height: 100px; object-fit: contain; }
+  </style>
+</head>
+<body>
+<div class="container py-4">
+  <h2 class="text-center mb-4">Choose Your T-Shirt</h2>
+  <div class="row g-4">
+    <!-- Category: Polo -->
+    <div class="col-md-4">
+      <div class="tshirt-card text-center">
+        <img src="https://printo-s3.dietpixels.net/site/2025/M&S%20t-shirts/T-shirt_1740039238.jpg?quality=70&format=webp&w=640" class="tshirt-img" />
+        <h5 class="mt-2">Polo T-Shirt</h5>
+        <button class="btn btn-danger mt-2" onclick="openCustomizer('P1','Polo','https://via.placeholder.com/300x300?text=Polo+Tshirt')">Customize</button>
+      </div>
+    </div>
+    <!-- Category: Classic -->
+    <div class="col-md-4">
+      <div class="tshirt-card text-center">
+        <img src="https://via.placeholder.com/300x300?text=Classic+Tshirt" class="tshirt-img" />
+        <h5 class="mt-2">Classic White Tee</h5>
+        <button class="btn btn-danger mt-2" onclick="openCustomizer('C1','Classic','https://via.placeholder.com/300x300?text=Classic+Tshirt')">Customize</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="customizerModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content p-3">
+      <div class="modal-header">
+        <h5>Customize T-Shirt</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body row">
+        <div class="col-md-6 position-relative">
+          <img id="previewImage" />
+          <img id="uploadedImage" class="uploaded-image" />
+          <div id="textOnTshirt" class="custom-text"></div>
+        </div>
+        <div class="col-md-6">
+          <input type="text" id="customText" class="form-control mb-3" placeholder="Custom Text" oninput="updateText()" />
+          <input type="file" class="form-control mb-3" accept="image/*" onchange="uploadImage(event)" />
+          <input type="color" class="form-control form-control-color mb-3" onchange="changeBgColor(event)" />
+          
+          <!-- Customer Info -->
+          <input type="text" id="customerName" class="form-control mb-2" placeholder="Your Name" />
+          <input type="text" id="mobileNumber" class="form-control mb-2" placeholder="Mobile Number" />
+          <textarea id="address" class="form-control mb-2" rows="2" placeholder="Full Address"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" onclick="saveOrder()">save and order</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let previewImage = document.getElementById("previewImage");
+  let uploadedImage = document.getElementById("uploadedImage");
+  let textOnTshirt = document.getElementById("textOnTshirt");
+  let selectedTshirtID = "";
+  let selectedCategory = "";
+
+  function openCustomizer(id, category, imgSrc) {
+    selectedTshirtID = id;
+    selectedCategory = category;
+    previewImage.src = imgSrc;
+    previewImage.style.backgroundColor = '';
+    textOnTshirt.innerText = "";
+    document.getElementById("customText").value = "";
+    uploadedImage.style.display = "none";
+    document.getElementById("customerName").value = "";
+    document.getElementById("mobileNumber").value = "";
+    document.getElementById("address").value = "";
+    new bootstrap.Modal(document.getElementById("customizerModal")).show();
+  }
+
+  function updateText() {
+    textOnTshirt.innerText = document.getElementById("customText").value;
+  }
+
+  function uploadImage(event) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      uploadedImage.src = e.target.result;
+      uploadedImage.style.display = "block";
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  }
+
+  function changeBgColor(e) {
+    previewImage.style.backgroundColor = e.target.value;
+  }
+
+  function generateOrderID() {
+    return "ODR" + Math.floor(100000 + Math.random() * 900000);
+  }
+
+  function saveOrder() {
+    const name = document.getElementById("customerName").value.trim();
+    const mobile = document.getElementById("mobileNumber").value.trim();
+    const address = document.getElementById("address").value.trim();
+
+    if (!name || !mobile || !address) {
+      alert("Please fill all your details.");
+      return;
+    }
+
+    const order = {
+      orderID: generateOrderID(),
+      tshirtID: selectedTshirtID,
+      category: selectedCategory,
+      text: document.getElementById("customText").value,
+      image: uploadedImage.src || "",
+      bgColor: previewImage.style.backgroundColor || "#fff",
+      name,
+      mobile,
+      address,
+      time: new Date().toLocaleString()
+    };
+
+    let orders = JSON.parse(localStorage.getItem("orders") || "[]");
+    orders.push(order);
+    localStorage.setItem("orders", JSON.stringify(orders));
+
+    alert(`Order Saved!\nOrder ID: ${order.orderID}`);
+    window.location.href = "https://pages.razorpay.com/stores/st_QHGlA9UFr8KZXa/checkout";
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
