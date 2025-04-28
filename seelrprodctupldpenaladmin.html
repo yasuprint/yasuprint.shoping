@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel - Product Approvals</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f7;
+      padding: 20px;
+    }
+    .product-card {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: flex-start;
+    }
+    .product-card img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-right: 20px;
+    }
+    .product-details {
+      flex: 1;
+    }
+    button {
+      margin-right: 10px;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+      font-weight: bold;
+    }
+    .approve { background-color: green; }
+    .reject { background-color: red; }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Admin Panel - Product Approvals</h2>
+
+<div id="productList"></div>
+
+<script>
+  const productListDiv = document.getElementById('productList');
+
+  function loadProducts() {
+    let products = JSON.parse(localStorage.getItem('products')) || [];
+
+    productListDiv.innerHTML = '';
+
+    if (products.length === 0) {
+      productListDiv.innerHTML = "<p>No products found!</p>";
+      return;
+    }
+
+    products.forEach((product, index) => {
+      if(product.status === "pending") { // सिर्फ pending products दिखेंगे
+        const productCard = document.createElement('div');
+        productCard.className = 'product-card';
+        productCard.innerHTML = `
+          <img src="${product.image}" alt="Product Image">
+          <div class="product-details">
+            <h3>${product.name}</h3>
+            <p><strong>Price:</strong> ₹${product.price}</p>
+            <p><strong>Description:</strong> ${product.description}</p>
+            <p><strong>Customer ID:</strong> ${product.customerId}</p>
+            <button class="approve" onclick="approveProduct(${index})">Approve</button>
+            <button class="reject" onclick="rejectProduct(${index})">Reject</button>
+          </div>
+        `;
+        productListDiv.appendChild(productCard);
+      }
+    });
+  }
+
+  function approveProduct(index) {
+    let products = JSON.parse(localStorage.getItem('products')) || [];
+    products[index].status = "approved";
+    localStorage.setItem('products', JSON.stringify(products));
+    loadProducts();
+    alert('Product Approved Successfully!');
+  }
+
+  function rejectProduct(index) {
+    let products = JSON.parse(localStorage.getItem('products')) || [];
+    products[index].status = "rejected";
+    localStorage.setItem('products', JSON.stringify(products));
+    loadProducts();
+    alert('Product Rejected!');
+  }
+
+  loadProducts(); // Page खुलते ही Products load होंगे
+</script>
+
+</body>
+</html>
