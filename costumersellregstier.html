@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+    }
+    .form-container {
+      background: white;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+    input, select {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      padding: 12px;
+      border: none;
+      width: 100%;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Create Your Seller Account</h2>
+  <form id="registrationForm">
+    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="tel" id="mobile" placeholder="Mobile Number" required>
+    <input type="text" id="aadhaar" placeholder="Aadhaar Number" required>
+    <input type="text" id="gst" placeholder="GST Number (Optional)">
+    <input type="text" id="account" placeholder="Bank Account Number" required>
+    <input type="text" id="ifsc" placeholder="IFSC Code" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button type="submit">Register</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById('registrationForm').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const customer = {
+      name: document.getElementById('name').value,
+      mobile: document.getElementById('mobile').value,
+      aadhaar: document.getElementById('aadhaar').value,
+      gst: document.getElementById('gst').value,
+      account: document.getElementById('account').value,
+      ifsc: document.getElementById('ifsc').value,
+      email: document.getElementById('email').value,
+      password: document.getElementById('password').value,
+      status: "pending" // जब तक admin approve नहीं करता
+    };
+
+    // अभी के लिए LocalStorage में Save कर रहे हैं
+    let customers = JSON.parse(localStorage.getItem('customers')) || [];
+    customers.push(customer);
+    localStorage.setItem('customers', JSON.stringify(customers));
+
+    alert("Registration Successful! Admin Approval Pending.");
+    document.getElementById('registrationForm').reset();
+  });
+</script>
+
+</body>
+</html>
