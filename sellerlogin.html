@@ -1,246 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>meshop - User Management</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
-
-        header {
-            background-color: #088178;
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
-
-        header h1 {
-            margin: 0;
-        }
-
-        .login-form, .register-form, .product-management {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .login-form input, .register-form input, .product-management input, .product-management select {
-            margin: 10px;
-            padding: 10px;
-            width: 200px;
-        }
-
-        .login-form button, .register-form button, .product-management button {
-            padding: 10px 20px;
-            background-color: #088178;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        .product-management {
-            display: none;
-        }
-
-        footer {
-            background-color: #088178;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        footer p {
-            margin: 5px 0;
-        }
-
-        .product-card {
-            background: #fff;
-            padding: 10px;
-            margin: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-            width: 200px;
-            display: inline-block;
-        }
-
-        .product-card img {
-            max-width: 100%;
-        }
-
-        .product-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Upload Your Product</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f9fc;
+      padding: 20px;
+    }
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin: auto;
+    }
+    input, textarea, button {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: green;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <h1>Welcome to meshop</h1>
-    </header>
+<h2 style="text-align:center;">Upload Your Product</h2>
 
-    <!-- Login Form -->
-    <div class="login-form" id="loginForm">
-        <h2>Login to Add or Edit Products</h2>
-        <input type="text" id="loginUsername" placeholder="Username" required>
-        <input type="password" id="loginPassword" placeholder="Password" required>
-        <button onclick="login()">Login</button>
-        <p>Don't have an account? <a href="javascript:void(0)" onclick="showRegisterForm()">Register here</a></p>
-    </div>
+<form id="productForm">
+  <input type="text" id="productName" placeholder="Product Name" required>
+  <input type="number" id="productPrice" placeholder="Price" required>
+  <textarea id="productDescription" placeholder="Product Description" required></textarea>
+  <input type="file" id="productImage" accept="image/*" required>
+  <button type="submit">Upload Product</button>
+</form>
 
-    <!-- Register Form (Hidden initially) -->
-    <div class="register-form" id="registerForm" style="display:none;">
-        <h2>Register a New Account</h2>
-        <input type="text" id="regUsername" placeholder="Username" required>
-        <input type="password" id="regPassword" placeholder="Password" required>
-        <button onclick="register()">Register</button>
-        <p>Already have an account? <a href="javascript:void(0)" onclick="showLoginForm()">Login here</a></p>
-    </div>
+<script>
+  const customerId = "customer123"; // Example: You can get this dynamically after login
 
-    <!-- Product Management Section (Hidden initially) -->
-    <div class="product-management" id="productManagement">
-        <h2>Welcome, <span id="userNameDisplay"></span></h2>
-        <form id="productForm">
-            <input type="text" id="productName" placeholder="Product Name" required>
-            <input type="text" id="productPrice" placeholder="Price (₹)" required>
-            <input type="file" id="productImage" required>
-            <select id="productSize" required>
-                <option value="Small">Small</option>
-                <option value="Medium">Medium</option>
-                <option value="Large">Large</option>
-            </select>
-            <button type="submit">Add Product</button>
-        </form>
+  document.getElementById('productForm').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-        <h3>Added Products</h3>
-        <div id="productContainer" class="product-container">
-            <!-- Products will be dynamically added here -->
-        </div>
-    </div>
+    const productName = document.getElementById('productName').value;
+    const productPrice = document.getElementById('productPrice').value;
+    const productDescription = document.getElementById('productDescription').value;
+    const productImageInput = document.getElementById('productImage');
 
-    <footer>
-        <p>© 2025 meshop. All rights reserved.</p>
-        <p>Contact us: support@meshop.com</p>
-    </footer>
+    if (productImageInput.files.length === 0) {
+      alert('Please upload a product image.');
+      return;
+    }
 
-    <script>
-        // Register function
-        function register() {
-            const username = document.getElementById('regUsername').value;
-            const password = document.getElementById('regPassword').value;
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      const productImage = event.target.result; // Image Base64 String में
 
-            if (username && password) {
-                const users = JSON.parse(localStorage.getItem('users')) || [];
-                const existingUser = users.find(user => user.username === username);
+      const product = {
+        name: productName,
+        price: productPrice,
+        description: productDescription,
+        image: productImage,
+        customerId: customerId,
+        status: "pending" // default pending
+      };
 
-                if (existingUser) {
-                    alert('Username already exists');
-                } else {
-                    users.push({ username, password, products: [] });
-                    localStorage.setItem('users', JSON.stringify(users));
-                    alert('Registration successful! You can now login.');
-                    showLoginForm();
-                }
-            } else {
-                alert('Please fill in both fields');
-            }
-        }
+      let products = JSON.parse(localStorage.getItem('products')) || [];
+      products.push(product);
+      localStorage.setItem('products', JSON.stringify(products));
 
-        // Login function
-        function login() {
-            const username = document.getElementById('loginUsername').value;
-            const password = document.getElementById('loginPassword').value;
-
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-            const user = users.find(user => user.username === username && user.password === password);
-
-            if (user) {
-                localStorage.setItem('loggedInUser', JSON.stringify(user));
-                showProductManagement(user);
-            } else {
-                alert('Invalid username or password');
-            }
-        }
-
-        // Show Product Management Section
-        function showProductManagement(user) {
-            document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('registerForm').style.display = 'none';
-            document.getElementById('productManagement').style.display = 'block';
-            document.getElementById('userNameDisplay').textContent = user.username;
-
-            displayProducts(user);
-        }
-
-        // Display products of logged-in user
-        function displayProducts(user) {
-            const productContainer = document.getElementById('productContainer');
-            productContainer.innerHTML = ''; // Clear the current displayed products
-
-            user.products.forEach(product => {
-                const productDiv = document.createElement('div');
-                productDiv.classList.add('product-card');
-                productDiv.innerHTML = `
-                    <h3>${product.name}</h3>
-                    <p>Price: ₹${product.price}</p>
-                    <img src="${product.image}" alt="${product.name}">
-                    <p>Size: ${product.size}</p>
-                `;
-                productContainer.appendChild(productDiv);
-            });
-        }
-
-        // Add product to logged-in user's account
-        document.getElementById('productForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const productName = document.getElementById('productName').value;
-            const productPrice = document.getElementById('productPrice').value;
-            const productImage = document.getElementById('productImage').files[0];
-            const productSize = document.getElementById('productSize').value;
-
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-                loggedInUser.products.push({
-                    name: productName,
-                    price: productPrice,
-                    image: event.target.result, // Image data URL
-                    size: productSize
-                });
-
-                // Update user's products in localStorage
-                const users = JSON.parse(localStorage.getItem('users'));
-                const updatedUsers = users.map(user => user.username === loggedInUser.username ? loggedInUser : user);
-                localStorage.setItem('users', JSON.stringify(updatedUsers));
-
-                displayProducts(loggedInUser);
-            };
-
-            if (productImage) {
-                reader.readAsDataURL(productImage); // Reading the image as Data URL
-            } else {
-                alert('Please upload an image');
-            }
-        });
-
-        // Show Register Form
-        function showRegisterForm() {
-            document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('registerForm').style.display = 'block';
-        }
-
-        // Show Login Form
-        function showLoginForm() {
-            document.getElementById('loginForm').style.display = 'block';
-            document.getElementById('registerForm').style.display = 'none';
-        }
-    </script>
+      alert('Product Uploaded Successfully! Waiting for Admin Approval.');
+      document.getElementById('productForm').reset();
+    };
+    reader.readAsDataURL(productImageInput.files[0]);
+  });
+</script>
 
 </body>
 </html>
