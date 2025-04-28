@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar with Search</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .navbar {
+            border-bottom: 3px solid red;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: red;
+        }
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #f4f4f4;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .search-box input {
+            border: none;
+            outline: none;
+            background: transparent;
+            padding: 5px;
+            width: 100%;
+        }
+        .search-box i {
+            color: gray;
+            cursor: pointer;
+        }
+        .search-results {
+            position: absolute;
+            top: 50px;
+            background: white;
+            width: 100%;
+            border: 1px solid #ccc;
+            display: none;
+            z-index: 1000;
+        }
+        .search-results ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .search-results li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+        .search-results li:hover {
+            background: #f4f4f4;
+        }
+        
+        body {
+                  background-color: #f5f5f5;
+              }
+              .card {
+                  transition: transform 0.3s ease-in-out;
+              }
+              .card:hover {
+                  transform: scale(1.05);
+              }
+              .buy-btn {
+                  background: #ff5733;
+                  color: white;
+                  transition: background 0.3s;
+              }
+              .buy-btn:hover {
+                  background: #c13d1b;
+              }
+              /* div css*/
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 20px;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.02);
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .card-body {
+      padding: 15px;
+    }
+    .card-title {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+    .price {
+      color: green;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .rating {
+      color: #ffa500;
+      margin: 5px 0;
+    }
+    .cashback {
+      font-size: 14px;
+      color: #007bff;
+      margin-bottom: 10px;
+    }
+    .buy-btn {
+      display: inline-block;
+      padding: 8px 12px;
+      background: #28a745;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.new1{
+  background-color: #f8f9fa;
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+ 
+}
+body {
+      font-family: sans-serif;
+      background-color: #f8f8f8;
+      padding: 20px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background-color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: scale(1.03);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .product-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .product-price {
+      color: green;
+      font-size: 14px;
+    }
+  </style>
+
+  
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-white p-3">
+        <div class="container-fluid">
+            <a class="navbar-brand logo" href="#">REDWOLF</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">SHOP</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">MEN</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">WOMEN</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">ACCESSORIES</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">CHARACTERS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">ARTIST MERCH</a></li>
+                </ul>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search" placeholder="Search for Products..." onkeyup="searchFunction()">
+                </div>
+                <div class="d-flex ms-3">
+                    <i class="fas fa-info-circle mx-2"></i>
+                    <i class="fas fa-map-marker-alt mx-2"></i>
+                    <i class="fas fa-user mx-2"></i>
+                    <i class="fas fa-shopping-cart mx-2"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="search-results" id="searchResults">
+            <ul id="resultsList"></ul>
+        </div>
+    </div>
+    <div id="carouselExample" class="carousel slide">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://www.redwolf.in/image/cache/catalog/sliders/t-shirts-india-slider-1920-1920x450.jpg?m=1710306142" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="https://www.redwolf.in/image/cache/catalog/sliders/bryan-adams-india-tour-limited-stock-slider-1920-1920x450.png?m=1737632765" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="https://www.redwolf.in/image/cache/catalog/sliders/dropcut-t-shirts-india-slider-1920-1920x450.jpg?m=1710299898" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <!-- div prodct saidebar-->
+</head>
+<body>
+
+  <h2 style="text-align:center;">Product Cards</h2>
+  <div class="container">
+    
+    <!-- Card Template Start -->
+    <!-- Repeat this block 10 times with changes -->
+    <div class="card">
+      <img src="https://printo-s3.dietpixels.net/site/20231117_231651346656_425950_Hoodies.jpg?quality=70&format=webp&w=640" alt="Product">
+      <div class="card-body">
+        <h3 class="card-title">Product Name</h3>
+        <p class="price">₹999</p>
+        <p class="rating">⭐ 4.5/5</p>
+        <p class="cashback">Get ₹100 Cashback</p>
+        <a href="allpolocostmize.html" class="buy-btn">Buy Now</a>
+      </div>
+    </div>
+    <!-- Repeat above card 10 times with different content if needed -->
+
+    <!-- Just duplicating the same for now 10 times -->
+    <div class="card"><img src="https://printo-s3.dietpixels.net/site/2024/Crew%20Neck/app_1729239783.jpg?quality=70&format=webp&w=640" alt="Product"><div class="card-body"><h3 class="card-title">Product Name</h3><p class="price">₹999</p><p class="rating">⭐ 4.5/5</p><p class="cashback">Get ₹100 Cashback</p><a href="allpolocostmize.html" class="buy-btn">Buy Now</a></div></div>
+    <div class="card"><img src="https://printo-s3.dietpixels.net/site/2025/M&S%20t-shirts/T-shirt_1740039238.jpg?quality=70&format=webp&w=640" alt="Product"><div class="card-body"><h3 class="card-title">Product Name</h3><p class="price">₹999</p><p class="rating">⭐ 4.5/5</p><p class="cashback">Get ₹100 Cashback</p><a href="allpolocostmize.html" class="buy-btn">Buy Now</a></div></div>
+    <div class="card"><img src="https://printo-s3.dietpixels.net/site/2024/Jack%20and%20Jones/1000_1725352932.jpg?quality=70&format=webp&w=640" alt="Product"><div class="card-body"><h3 class="card-title">Product Name</h3><p class="price">₹999</p><p class="rating">⭐ 4.5/5</p><p class="cashback">Get ₹100 Cashback</p><a href="allpolocostmize.html" class="buy-btn">Buy Now</a></div></div>
+    <div class="card"><img src="https://printo-s3.dietpixels.net/site/2024/Jack%20and%20Jones/Polo_1725448502.jpg?quality=70&format=webp&w=640" alt="Product"><div class="card-body"><h3 class="card-title">Product Name</h3><p class="price">₹999</p><p class="rating">⭐ 4.5/5</p><p class="cashback">Get ₹100 Cashback</p><a href="allpolocostmize.html" class="buy-btn">Buy Now</a></div></div>
+    <div class="card"><img src="https://printo-s3.dietpixels.net/site/2024/Jack%20and%20Jones/1440_1725448502.jpg?quality=70&format=webp&w=640" alt="Product"><div class="card-body"><h3 class="card-title">Product Name</h3><p class="price">₹999</p><p class="rating">⭐ 4.5/5</p><p class="cashback">Get ₹100 Cashback</p><a href="allpolocostmize.html" class="buy-btn">Buy Now</a></div></div>
+    <div class="card"><img src="https://printo-s3.dietpixels.net/site/2024/Shop%20by%20need/Round-neck_1728467856.jpg?quality=70&format=webp&w=640" alt="Product"><div class="card-body"><h3 class="card-title">Product Name</h3><p class="price">₹999</p><p class="rating">⭐ 4.5/5</p><p class="cashback">Get ₹100 Cashback</p><a href="allpolocostmize.html" class="buy-btn">Buy Now</a></div></div>
+    <div class="card"><img src="https://printo-s3.dietpixels.net/site/2024/Tote%20bag/regular_1721716377.jpg?quality=70&format=webp&w=640" alt="Product"><div class="card-body"><h3 class="card-title">Product Name</h3><p class="price">₹999</p><p class="rating">⭐ 4.5/5</p><p class="cashback">Get ₹100 Cashback</p><a href="allpolocostmize.html" class="buy-btn">Buy Now</a></div></div>
+    <div class="card"><img src="https://printo-s3.dietpixels.net/site/2024/Tote%20bag/regular_1721716377.jpg?quality=70&format=webp&w=640" alt="Product"><div class="card-body"><h3 class="card-title">Product Name</h3><p class="price">₹999</p><p class="rating">⭐ 4.5/5</p><p class="cashback">Get ₹100 Cashback</p><a href="allpolocostmize.html" class="buy-btn">Buy Now</a></div></div>
+    <div class="card"><img src="https://printo-s3.dietpixels.net/site/2024/Tote%20bag/regular_1721716377.jpg?quality=70&format=webp&w=640" alt="Product"><div class="card-body"><h3 class="card-title">Product Name</h3><p class="price">₹999</p><p class="rating">⭐ 4.5/5</p><p class="cashback">Get ₹100 Cashback</p><a href="allpolocostmize.html" class="buy-btn">Buy Now</a></div></div>
+    
+  </div>
+<div class="new1">
+  <p>
+    Clothing Accessories - Embroidered & Printed Caps
+  </p>
+</div>
+
+
+  <div class="product-grid">
+    <div class="product-card">
+      <img src="https://printo-s3.dietpixels.net/site/2024/Leatherette%20Acrylic%20Frame/Cap_1721130625.jpg?quality=70&format=webp&w=640" alt="Red Cap">
+      <div class="product-info">
+        <div class="product-title">Red OmniTech Cap</div>
+        <div class="product-price">₹199</div>
+        <div>
+          <a href="capcostmize.html" class="buy-btn">Buy Now</a>
+        
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://printo-s3.dietpixels.net/site/20230719_112025575215_e5bc9a_Line-stiching.jpg?quality=70&format=webp&w=640" alt="Grey Cap">
+      <div class="product-info">
+        <div class="product-title">Grey Aetas Cap</div>
+        <div class="product-price">₹249</div>
+        <div>
+          <a href="capcostmize.html" class="buy-btn">Buy Now</a>
+        
+        </div>
+      </div>
+      
+    </div>
+    <div class="product-card">
+      <img src="https://printo-s3.dietpixels.net/site/20230719_112030914485_1da444_piping.jpg?quality=70&format=webp&w=640" alt="White Cap">
+      <div class="product-info">
+        <div class="product-title">White Aetas Cap</div>
+        <div class="product-price">₹249</div>'
+        <div>
+          <a href="capcostmize.html" class="buy-btn">Buy Now</a>
+        
+        </div>
+      </div>
+      
+    </div>
+    <div class="product-card">
+      <img src="https://printo-s3.dietpixels.net/site/20230719_112037745893_bd9f0d_tipping.jpg?quality=70&format=webp&w=640" alt="Black Cap">
+      <div class="product-info">
+        <div class="product-title">Black Aetas Cap</div>
+        <div class="product-price">₹249</div>
+        <div>
+          <a href="capcostmiuze.html" class="buy-btn">Buy Now</a>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+
+   
+         
+      
+    <script>
+        const products = ["T-Shirt", "Hoodie", "Mug", "Sticker", "Poster", "Cap", "Backpack"];
+        function searchFunction() {
+            let input = document.getElementById("search").value.toLowerCase();
+            let resultsDiv = document.getElementById("searchResults");
+            let resultsList = document.getElementById("resultsList");
+            resultsList.innerHTML = "";
+            if (input) {
+                let filtered = products.filter(p => p.toLowerCase().includes(input));
+                if (filtered.length > 0) {
+                    resultsDiv.style.display = "block";
+                    filtered.forEach(item => {
+                        let li = document.createElement("li");
+                        li.textContent = item;
+                        resultsList.appendChild(li);
+                    });
+                } else {
+                    resultsDiv.style.display = "none";
+                }
+            } else {
+                resultsDiv.style.display = "none";
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
