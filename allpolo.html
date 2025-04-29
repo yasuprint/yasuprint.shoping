@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>SpiritHero Clone - Stylish Version</title>
   <link href="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <style>
     * {
@@ -365,9 +366,32 @@
         font-size: 15px;
       }
     }
+    .back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #1976d2;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;  /* Link underline remove */
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+
+  .back-button:hover {
+    background-color: #125a9c;
+  }
+
+  .material-icons {
+    font-size: 20px;
+    vertical-align: middle;
+  }
   </style>
 </head>
 <body>
+
+
 
 <!-- Navbar -->
 <div class="navbar">
@@ -378,6 +402,7 @@
       <option>Hindi</option>
     </select>
   </div>
+
   <div>
     <span>📞 1-800-239-9948</span>
     <a href="#">Login</a>
@@ -385,6 +410,11 @@
     <a href="#">Checkout</a>
   </div>
 </div>
+<!-- Back Button -->
+<a href="secondhome.html" class="back-button">
+    <span class="material-icons">arrow_back</span>
+    Back
+  </a>
 
 <!-- Logo -->
 <div class="logo">
