@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin & Employee Panel</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #f4f4f4; }
+        .login-container { width: 300px; margin: 100px auto; padding: 20px; background: white; box-shadow: 0px 0px 10px gray; text-align: center; }
+        .login-container input { width: 100%; padding: 10px; margin: 10px 0; }
+        .login-container button { width: 100%; padding: 10px; background: green; color: white; border: none; cursor: pointer; }
+        .panel { display: none; }
+        .header { background: #233245; color: white; padding: 10px; text-align: center; }
+        .side-nav { width: 200px; background: #282639; height: 100vh; position: fixed; left: 0; top: 0; color: white; padding-top: 20px; }
+        .side-nav ul { list-style: none; padding: 0; }
+        .side-nav ul li { padding: 15px; cursor: pointer; }
+        .side-nav ul li:hover { background: #3c506a; }
+        .side-nav ul li i { margin-right: 10px; }
+        .content { margin-left: 220px; padding: 20px; }
+
+        /* Remove link color and underline */
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Login Form -->
+    <div class="login-container" id="login-form">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="panel" id="admin-panel">
+        <div class="header">
+            <h2>Admin Dashboard</h2>
+            <button onclick="logout()" style="float:right; background:red; border:none; color:white; padding:5px 10px; cursor:pointer;">Logout</button>
+        </div>
+        <div class="side-nav">
+            <ul>
+                
+                <li><a href="seelrprodctupldpenaladmin.html"><i class="fa fa-users"></i>saler prodct  Check</a></li>>
+                <li><a href="costumerserprodctaddpenal.html"><i class="fas fa-money-check-alt"></i>saler-odres</a></li>
+                <li><a href="accounthandell.html"><i class="fa fa-bell"></i>costumer account hendale</a></li>
+                <li><a href="   costuemrrgsitersellpenal.html"><i class="fa fa-bell"></i>costumer account rgsiter</a></li>
+                <li><a href="adminaddordersadd.html"><i class="fas fa-chart-bar"></i> Product Add Panel</a></li>
+            </ul>
+        </div>
+        <div class="content" id="content-area">
+            <h3>Welcome to Admin Panel</h3>
+            <p>Select an option from the menu.</p>
+        </div>
+    </div>
+ 
+
+    <!-- Employee Panel -->
+    <div class="panel" id="employee-panel">
+        <div class="header">
+            <h2>Employee Dashboard</h2>
+            <button onclick="logout()" style="float:right; background:red; border:none; color:white; padding:5px 10px; cursor:pointer;">Logout</button>
+        </div>
+        <div class="side-nav">
+            <ul>
+                <li onclick="loadPage('tasks')"><i class="fas fa-tasks"></i> My Tasks</li>
+                <li><a href="E:/MY DATA COCHING/printcrelity/emloye profle.html" onclick="loadPage('profile')"><i class="fa fa-user"></i> Profile</a></li>
+                <li onclick="loadPage('notifications')"><i class="fa fa-bell"></i> Notifications</li>
+                <li><a href="E:/MY DATA COCHING/all  penal/mange user.html" onclick="loadPage('checkOrders')"><i class="fas fa-list"></i> All Panel</a></li>
+            </ul>
+        </div>
+        <div class="content" id="content-area">
+            <h3>Welcome to Employee Panel</h3>
+            <p>Select an option from the menu.</p>
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            if (username === "admin" && password === "admin123") {
+                document.getElementById("login-form").style.display = "none";
+                document.getElementById("admin-panel").style.display = "block";
+            } else if (username === "sohan@123" && password === "sohan123@") {
+                document.getElementById("login-form").style.display = "none";
+                document.getElementById("employee-panel").style.display = "block";
+            } else if (username === "yasuyadav" && password === "123yasu") {
+                document.getElementById("login-form").style.display = "none";
+                document.getElementById("employee-panel").style.display = "block";
+            } else {
+                alert("Invalid credentials! Try again.");
+            }
+        }
+
+        function logout() {
+            document.getElementById("login-form").style.display = "block";
+            document.getElementById("admin-panel").style.display = "none";
+            document.getElementById("employee-panel").style.display = "none";
+        }
+
+        function loadPage(page) {
+            var content = {
+                "dashboard": "<h3>Dashboard</h3><p>This is the dashboard section.</p>",
+                "manage-employees": "<h3>Manage Employees</h3><p>Here you can manage employees.</p>",
+                "manage-employers": "<h3>Manage Employers</h3><p>Here you can manage employers.</p>",
+                "withdrawals": "<h3>Withdrawal Request</h3><p>Manage withdrawal requests here.</p>",
+                "projects": "<h3>List Of Projects</h3><p>View all projects.</p>",
+                "analytics": "<h3>Analytics</h3><p>View analytics data.</p>",
+                "payments": "<h3>Payment History</h3><p>View payment history.</p>",
+                "notifications": "<h3>Notifications</h3><p>Check latest notifications.</p>",
+                "accounts-ledger": "<h3>Accounts Ledger</h3><p>View accounts ledger details.</p>",
+                "tasks": "<h3>My Tasks</h3><p>View and manage your tasks.</p>",
+                "profile": "<h3>Profile</h3><p>Update your profile details.</p>",
+                "salary": "<h3>Salary Details</h3><p>View your salary information.</p>"
+            };
+
+            document.getElementById("content-area").innerHTML = content[page] || "<h3>Page Not Found</h3>";
+        }
+    </script>
+
+</body>
+</html>
