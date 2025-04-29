@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel - Orders</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #eaeff2;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    th {
+      background: #007bff;
+      color: white;
+    }
+    img {
+      max-width: 80px;
+    }
+    button {
+      padding: 6px 10px;
+      background: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    select {
+      padding: 5px;
+    }
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      border: 1px solid #ccc;
+      padding: 20px;
+      z-index: 1000;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      display: none;
+    }
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Admin Panel - All T-shirt Orders</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th>T-shirt ID</th>
+      <th>Text</th>
+      <th>Image</th>
+      <th>Status</th>
+      <th>View</th>
+    </tr>
+  </thead>
+  <tbody id="order-body"></tbody>
+</table>
+
+<!-- Popup for Viewing Full Order -->
+<div class="overlay" id="overlay"></div>
+<div class="popup" id="popup">
+  <h3>Order Details</h3>
+  <div id="order-details"></div>
+  <br>
+  <button onclick="closePopup()">Close</button>
+</div>
+
+<script>
+  const tbody = document.getElementById("order-body");
+  let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+  if (orders.length === 0) {
+    tbody.innerHTML = "<tr><td colspan='8'>No orders found.</td></tr>";
+  } else {
+    orders.forEach((order, index) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${order.name}</td>
+        <td>${order.phone}</td>
+        <td>${order.address}</td>
+        <td>${order.tshirtID}</td>
+        <td>${order.text}</td>
+        <td><img src="${order.image}" alt="img" /></td>
+        <td>
+          <select onchange="updateStatus(${index}, this.value)">
+            <option value="Pending" ${order.status === "Pending" ? "selected" : ""}>Pending</option>
+            <option value="Confirmed" ${order.status === "Confirmed" ? "selected" : ""}>Confirmed</option>
+            <option value="Shipped" ${order.status === "Shipped" ? "selected" : ""}>Shipped</option>
+            <option value="Delivered" ${order.status === "Delivered" ? "selected" : ""}>Delivered</option>
+          </select>
+        </td>
+        <td><button onclick="viewOrder(${index})">View</button></td>
+      `;
+      tbody.appendChild(row);
+    });
+  }
+
+  function updateStatus(index, newStatus) {
+    orders[index].status = newStatus;
+    localStorage.setItem("orders", JSON.stringify(orders));
+    alert("Status updated to " + newStatus);
+  }
+
+  function viewOrder(index) {
+    const order = orders[index];
+    const details = `
+      <p><strong>Name:</strong> ${order.name}</p>
+      <p><strong>Phone:</strong> ${order.phone}</p>
+      <p><strong>Address:</strong> ${order.address}</p>
+      <p><strong>T-shirt ID:</strong> ${order.tshirtID}</p>
+      <p><strong>Text:</strong> ${order.text}</p>
+      <p><strong>Status:</strong> ${order.status}</p>
+      <img src="${order.image}" alt="Image" style="max-width:150px;">
+    `;
+    document.getElementById("order-details").innerHTML = details;
+    document.getElementById("overlay").style.display = "block";
+    document.getElementById("popup").style.display = "block";
+  }
+
+  function closePopup() {
+    document.getElementById("overlay").style.display = "none";
+    document.getElementById("popup").style.display = "none";
+  }
+</script>
+
+</body>
+</html>
