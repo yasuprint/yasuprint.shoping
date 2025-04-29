@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>T-shirt Customization</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    .container {
+      display: flex;
+      gap: 20px;
+    }
+    .preview {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+    .tshirt {
+      width: 300px;
+      height: 400px;
+      background-size: cover;
+      margin: 0 auto;
+      position: relative;
+    }
+    #custom-text {
+      position: absolute;
+      top: 65%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: bold;
+      color: white;
+      font-size: 20px;
+    }
+    #preview-img {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 100px;
+      max-height: 100px;
+    }
+    .form {
+      flex: 1;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Customize Your T-shirt</h2>
+<div class="container">
+  <div class="preview">
+    <div class="tshirt" id="tshirt-area" style="background-image: url('https://via.placeholder.com/300x400');">
+      <div id="custom-text">Your Text</div>
+      <img id="preview-img" src="" alt="Uploaded Image">
+    </div>
+  </div>
+  <div class="form">
+    <input type="text" id="text-input" placeholder="Text on T-shirt">
+    <input type="file" id="image-input" accept="image/*">
+    <input type="text" id="cust-name" placeholder="Full Name">
+    <input type="text" id="cust-phone" placeholder="Phone Number">
+    <input type="text" id="cust-address" placeholder="Address">
+    <select id="tshirt-id">
+      <option value="">Select T-shirt ID</option>
+      <option value="TSHIRT101">TSHIRT101</option>
+      <option value="TSHIRT102">TSHIRT102</option>
+      <option value="TSHIRT103">TSHIRT103</option>
+      <option value="TSHIRT104">TSHIRT104</option>
+    </select>
+    <button onclick="submitOrder()">Submit Order</button>
+  </div>
+</div>
+
+<script>
+  const textInput = document.getElementById('text-input');
+  const customText = document.getElementById('custom-text');
+  const imageInput = document.getElementById('image-input');
+  const previewImg = document.getElementById('preview-img');
+  const tshirtArea = document.getElementById('tshirt-area');
+
+  const tshirtImages = {
+    TSHIRT101: 'https://via.placeholder.com/300x400/FF0000/FFFFFF?text=TSHIRT101',
+    TSHIRT102: 'https://via.placeholder.com/300x400/0000FF/FFFFFF?text=TSHIRT102',
+    TSHIRT103: 'https://via.placeholder.com/300x400/008000/FFFFFF?text=TSHIRT103',
+    TSHIRT104: 'https://via.placeholder.com/300x400/FFA500/FFFFFF?text=TSHIRT104'
+  };
+
+  textInput.addEventListener('input', () => {
+    customText.textContent = textInput.value;
+  });
+
+  imageInput.addEventListener('change', (e) => {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      previewImg.src = e.target.result;
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  });
+
+  document.getElementById('tshirt-id').addEventListener('change', (e) => {
+    const img = tshirtImages[e.target.value];
+    if (img) {
+      tshirtArea.style.backgroundImage = `url('${img}')`;
+    } else {
+      tshirtArea.style.backgroundImage = `url('https://via.placeholder.com/300x400')`;
+    }
+  });
+
+  function submitOrder() {
+    const order = {
+      name: document.getElementById('cust-name').value,
+      phone: document.getElementById('cust-phone').value,
+      address: document.getElementById('cust-address').value,
+      tshirtID: document.getElementById('tshirt-id').value,
+      text: document.getElementById('text-input').value,
+      image: previewImg.src,
+      status: 'Pending'
+    };
+
+    if (!order.name || !order.phone || !order.address || !order.tshirtID) {
+      alert("Please fill all fields.");
+      return;
+    }
+
+    const existing = JSON.parse(localStorage.getItem('orders')) || [];
+    existing.push(order);
+    localStorage.setItem('orders', JSON.stringify(existing));
+
+    alert("Order submitted!");
+
+    // Redirect to respective payment page
+    switch(order.tshirtID) {
+      case "TSHIRT101":
+        window.location.href = "https://pages.razorpay.com/pl_QOnCiHJHv0cu99/view";
+        break;
+      case "TSHIRT102":
+        window.location.href = "https://rzp.io/rzp/ZCrjvUc";
+        break;
+      case "TSHIRT103":
+        window.location.href = "https://rzp.io/rzp/ZCrjvUc";
+        break;
+      case "TSHIRT104":
+        window.location.href = "https://rzp.io/rzp/ZCrjvUc";
+        break;
+      default:
+        alert("Invalid T-shirt ID selected!");
+        break;
+    }
+  }
+</script>
+
+</body>
+</html>
