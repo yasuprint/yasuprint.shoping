@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Order - GD Admin Panel</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f0f0f0;
+}
+
+.navbar {
+  background: #2c3e50;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+}
+
+.sidebar {
+  width: 200px;
+  background: #34495e;
+  color: white;
+  min-height: 100vh;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 10px 20px;
+}
+
+.sidebar li a {
+  color: white;
+  text-decoration: none;
+}
+
+.main-content {
+  flex: 1;
+  padding: 30px;
+  background: white;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th, table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.status.pending {
+  color: orange;
+}
+
+.status.delivered {
+  color: green;
+}
+
+button {
+  margin-right: 5px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <h1>GD Admin - Add Order</h1>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <ul>
+        <li><a href="orders.html">📦 View Orders</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <h2>Add New Order</h2>
+      <form id="orderForm">
+        <label>Customer Name:</label>
+        <input type="text" id="customerName" required><br><br>
+
+        <label>Product Name:</label>
+        <input type="text" id="productName" required><br><br>
+
+        <label>Price:</label>
+        <input type="number" id="price" required><br><br>
+
+        <label>Status:</label>
+        <select id="status">
+          <option value="Pending">Pending</option>
+          <option value="Delivered">Delivered</option>
+        </select><br><br>
+
+        <label>Order Date:</label>
+        <input type="date" id="orderDate" required><br><br>
+
+        <button type="submit">Add Order</button>
+      </form>
+    </main>
+  </div>
+
+  <script>
+    document.getElementById("orderForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const order = {
+        customer: document.getElementById("customerName").value,
+        product: document.getElementById("productName").value,
+        price: document.getElementById("price").value,
+        status: document.getElementById("status").value,
+        date: document.getElementById("orderDate").value
+      };
+
+      // Save to localStorage
+      let orders = JSON.parse(localStorage.getItem("orders")) || [];
+      orders.push(order);
+      localStorage.setItem("orders", JSON.stringify(orders));
+
+      alert("Order added!");
+      window.location.href = "orders.html";
+    });
+  </script>
+</body>
+</html>
