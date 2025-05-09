@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SpiritHero Clone - Stylish Version</title>
+  <link href="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: #fdfdfd;
+    }
+    .navbar {
+      background: linear-gradient(90deg, #6b2d90, #f8b133);
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 30px;
+      font-size: 14px;
+      align-items: center;
+      color: #fff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .navbar select, .navbar a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #fff;
+      background: transparent;
+      border: 1px solid #fff;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 13px;
+      transition: 0.3s;
+    }
+    .navbar select:hover, .navbar a:hover {
+      background: #fff;
+      color: #6b2d90;
+      cursor: pointer;
+    }
+    .navbar span {
+      background: #fff;
+      color: #6b2d90;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 13px;
+      margin-right: 10px;
+    }
+    .logo {
+      text-align: center;
+      padding: 40px 0 20px 0;
+    }
+    .logo h1 {
+      font-size: 48px;
+      font-weight: bold;
+      color: #6b2d90;
+      display: inline-block;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    }
+    .logo h1 span {
+      color: #f8b133;
+    }
+    .logo p {
+      font-size: 20px;
+      color: #6b2d90;
+      margin-top: 8px;
+      font-weight: bold;
+    }
+    .menu {
+      background: #ffffff;
+      border-top: 2px solid #f8b133;
+      border-bottom: 2px solid #f8b133;
+      padding: 12px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .menu a {
+      text-decoration: none;
+      color: #6b2d90;
+      padding: 10px 20px;
+      font-size: 15px;
+      border-radius: 30px;
+      transition: 0.3s;
+    }
+    .menu a:hover {
+      background: #f8b133;
+      color: #fff;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 25px;
+      padding: 40px 30px;
+      background: #f5f5f5;
+    }
+    .product {
+      background: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      text-align: center;
+      box-shadow: 0 6px 10px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+    }
+    .product:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+    }
+    .product img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .product h3 {
+      font-size: 18px;
+      margin: 15px 0 8px 0;
+      color: #333;
+    }
+    .product p {
+      font-size: 16px;
+      color: #6b2d90;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+    }
+
+    .caps-section {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .caps-title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 40px;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 10px;
+      color: #333;
+    }
+
+    .caps-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+    }
+
+    .cap-card {
+      flex: 1 1 22%;
+      border: 1px solid #eee;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.08);
+      border-radius: 8px;
+      transition: 0.3s;
+      text-align: center;
+    }
+
+    .cap-card:hover {
+      box-shadow: 0 0 20px rgba(0,0,0,0.15);
+    }
+
+    .cap-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+    }
+
+    .color-options {
+      margin: 10px 0;
+    }
+
+    .color-dot {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      margin: 0 4px;
+      border-radius: 50%;
+      border: 1px solid #999;
+    }
+
+    .cap-title {
+      font-weight: bold;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    .cap-type {
+      color: #555;
+      font-size: 14px;
+    }
+
+    .cap-price {
+      margin-top: 6px;
+      font-size: 14px;
+      color: #007b00;
+    }
+
+    @media screen and (max-width: 1024px) {
+      .cap-card {
+        flex: 1 1 45%;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .cap-card {
+        flex: 1 1 100%;
+      }
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 40px 20px;
+      background-color: #f8f8f8;
+    }
+
+    .faq-section {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .faq-title {
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 40px;
+    }
+
+    .faq-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: space-between;
+    }
+
+    .faq-column {
+      flex: 1 1 48%;
+    }
+
+    .faq-item {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      padding: 15px 20px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      padding: 0 20px 15px;
+      display: none;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .faq-item.active .plus {
+      transform: rotate(45deg);
+    }
+
+    .plus {
+      font-size: 22px;
+      transition: 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      .faq-column {
+        flex: 1 1 100%;
+      }
+    }
+    .features-section {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      background: #fff;
+      padding: 40px 20px;
+      text-align: center;
+      gap: 30px;
+    }
+
+    .feature-box {
+      flex: 1 1 200px;
+      max-width: 250px;
+    }
+
+    .icon {
+      font-size: 50px;
+      color: #6a1b9a;
+      margin-bottom: 10px;
+    }
+
+    .google-icon {
+      color: #ea4335;
+    }
+
+    .feature-box h4 {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #222;
+    }
+
+    .feature-box p {
+      font-size: 14px;
+      color: #555;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #222;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px 15px;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+
+      p {
+        font-size: 15px;
+      }
+    }
+    .back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #1976d2;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;  /* Link underline remove */
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+
+  .back-button:hover {
+    background-color: #125a9c;
+  }
+
+  .material-icons {
+    font-size: 20px;
+    vertical-align: middle;
+  }
+
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #fff;
+      }
+  
+      .caps-section {
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: auto;
+      }
+  
+      .caps-title {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 40px;
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 10px;
+        color: #333;
+      }
+  
+      .caps-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: space-between;
+      }
+  
+      .cap-card {
+        flex: 1 1 22%;
+        border: 1px solid #eee;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.08);
+        border-radius: 8px;
+        transition: 0.3s;
+        text-align: center;
+      }
+  
+      .cap-card:hover {
+        box-shadow: 0 0 20px rgba(0,0,0,0.15);
+      }
+  
+      .cap-card img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 6px;
+      }
+  
+      .color-options {
+        margin: 10px 0;
+      }
+  
+      .color-dot {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        margin: 0 4px;
+        border-radius: 50%;
+        border: 1px solid #999;
+      }
+  
+      .cap-title {
+        font-weight: bold;
+        margin-top: 10px;
+        font-size: 16px;
+      }
+  
+      .cap-type {
+        color: #555;
+        font-size: 14px;
+      }
+  
+      .cap-price {
+        margin-top: 6px;
+        font-size: 14px;
+        color: #007b00;
+      }
+  
+      @media screen and (max-width: 1024px) {
+        .cap-card {
+          flex: 1 1 45%;
+        }
+      }
+  
+      @media screen and (max-width: 768px) {
+        .cap-card {
+          flex: 1 1 100%;
+        }
+      }
+    </style>
+  </style>
+</head>
+<body>
+
+
+
+<!-- Navbar -->
+<div class="navbar">
+  <div>
+    <select>
+      <option>Select Language</option>
+      <option>English</option>
+      <option>Hindi</option>
+    </select>
+  </div>
+
+  <div>
+    <span>📞 1-800-239-9948</span>
+    <a href="#">Login</a>
+    <a href="#">Cart(1)</a>
+    <a href="#">Checkout</a>
+  </div>
+</div>
+<!-- Back Button -->
+<a href="secondhome.html" class="back-button">
+    <span class="material-icons">arrow_back</span>
+    Back
+  </a>
+
+<!-- Logo -->
+<div class="logo">
+  <h1>yasu<span>print</span></h1>
+  <p>Welcome to Our Store!</p>
+</div>
+
+<!-- Menu -->
+<div class="menu">
+  <a href="#">Find Your Store</a>
+  <a href="#">Get Free Online Store</a>
+  <a href="#">How It Works</a>
+  <a href="#">Bulk Orders</a>
+  <a href="#">FAQ</a>
+  <a href="#">Design Ideas</a>
+  <a href="#">Contact Us</a>
+</div>
+
+   <section class="caps-section">
+    <div class="caps-title">New Launches
+    </div>
+
+    <div class="caps-container">
+      
+      <!-- Cap 1 -->
+      <div class="cap-card">
+     <a href="BrandedT-shirtscostmuize.html">  <img src="https://printo-s3.dietpixels.net/site/2024/Drinkware%201/Black-1-_1726210479.jpg?quality=70&format=webp&w=640" alt="Classic Caps"></a>
+        <div class="color-options">
+          <span class="color-dot" style="background:black;"></span>
+          <span class="color-dot" style="background:white;"></span>
+          <span class="color-dot" style="background:orange;"></span>
+          <span class="color-dot" style="background:blue;"></span>
+          <span class="color-dot" style="background:gray;"></span>
+          <span class="color-dot" style="background:pink;"></span>
+          <span class="color-dot" style="background:purple;"></span>
+        </div>
+        <div class="cap-title">M and S Tipped Polo T-shirts</div>
+        <div class="cap-type">Digital Printing</div>
+        <div class="cap-price">₹1,844.48</div>
+      </div>
+
+      <!-- Cap 2 -->
+      <div class="cap-card">
+     <a href="BrandedT-shirtscostmuize.html">  <img src="https://printo-s3.dietpixels.net/site/2024/Drinkware%201/Flora_1726210479.jpg?quality=70&format=webp&w=640" alt="Line stitching caps"></a> 
+        <div class="color-options">
+          <span class="color-dot" style="background:black;"></span>
+          <span class="color-dot" style="background:white;"></span>
+          <span class="color-dot" style="background:orange;"></span>
+          <span class="color-dot" style="background:blue;"></span>
+          <span class="color-dot" style="background:gray;"></span>
+          <span class="color-dot" style="background:pink;"></span>
+          <span class="color-dot" style="background:purple;"></span>
+        </div>
+        <div class="cap-title">Jack and Jones Polo T-shirts</div>
+        <div class="cap-type">Embroidery</div>
+        <div class="cap-price">₹1999</div>
+      </div>
+
+      <!-- Cap 3 -->
+      <div class="cap-card">
+      <a href="BrandedT-shirtscostmuize.html"><img src="https://printo-s3.dietpixels.net/site/2024/Drinkware%201/Freo---BLack_1726134538.jpg?quality=70&format=webp&w=640" alt="Piping Caps"></a>
+        <div class="color-options">
+          <span class="color-dot" style="background:black;"></span>
+          <span class="color-dot" style="background:white;"></span>
+          <span class="color-dot" style="background:orange;"></span>
+          <span class="color-dot" style="background:blue;"></span>
+          <span class="color-dot" style="background:#222;"></span>
+        </div>
+        <div class="cap-title">M and S Polo T-shirts</div>
+        <div class="cap-type">Embroidery</div>
+        <div class="cap-price">₹1999</div>
+      </div>
+
+      <!-- Cap 4 -->
+      <div class="cap-card">
+       <a href="BrandedT-shirtscostmuize.html"> <img src="https://printo-s3.dietpixels.net/site/20220714_120846656089_a65f5d_Product_96.jpg?quality=70&format=webp&w=640" alt="Tipping Caps"></a>
+        <div class="color-options">
+          <span class="color-dot" style="background:black;"></span>
+          <span class="color-dot" style="background:white;"></span>
+          <span class="color-dot" style="background:orange;"></span>
+          <span class="color-dot" style="background:blue;"></span>
+          <span class="color-dot" style="background:#222;"></span>
+        </div>
+        <div class="cap-title">M and S Round Neck T-shirts</div>
+        <div class="cap-type">Embroidery</div>
+        <div class="cap-price">₹1999 each for 50 Caps</div>
+      </div>
+
+    </div>
+
+  </section>
+  <section class="caps-section">
+    <div class="caps-title">Best Sellers</div>
+
+    <div class="caps-container">
+      
+      <!-- Cap 1 -->
+      <div class="cap-card">
+       <a href="allpolocostmize.html"> <img src="https://printo-s3.dietpixels.net/site/20220713_134832363479_f15578_Elite_Black_Sipper_1.jpg?quality=70&format=webp&w=640" alt="Classic Caps"></a>
+        <div class="color-options">
+          <span class="color-dot" style="background:black;"></span>
+          <span class="color-dot" style="background:white;"></span>
+          <span class="color-dot" style="background:orange;"></span>
+          <span class="color-dot" style="background:blue;"></span>
+          <span class="color-dot" style="background:gray;"></span>
+          <span class="color-dot" style="background:pink;"></span>
+          <span class="color-dot" style="background:purple;"></span>
+        </div>
+        <div class="cap-title">Classic Caps</div>
+        <div class="cap-type">Digital Printing</div>
+        <div class="cap-price">₹334 for each 5 Caps</div>
+      </div>
+
+      <!-- Cap 2 -->
+      <div class="cap-card">
+       <a href="allpolocostmize.html"><img src="https://printo-s3.dietpixels.net/site/20220713_134547467160_e18aff_Prime_White_Sipper_1.jpg?quality=70&format=webp&w=640" alt="Line stitching caps"></a>
+        <div class="color-options">
+          <span class="color-dot" style="background:black;"></span>
+          <span class="color-dot" style="background:white;"></span>
+          <span class="color-dot" style="background:orange;"></span>
+          <span class="color-dot" style="background:blue;"></span>
+          <span class="color-dot" style="background:gray;"></span>
+          <span class="color-dot" style="background:pink;"></span>
+          <span class="color-dot" style="background:purple;"></span>
+        </div>
+        <div class="cap-title">Line stitching caps</div>
+        <div class="cap-type">Embroidery</div>
+        <div class="cap-price">₹207 each for 50 Caps</div>
+      </div>
+
+      <!-- Cap 3 -->
+      <div class="cap-card">
+       <a href="allpolocostmize.html"><img src="https://printo-s3.dietpixels.net/site/20220713_115758847421_37eb46_Rocker_Black_Mug_2.jpg?quality=70&format=webp&w=640" alt="Piping Caps"></a> 
+        <div class="color-options">
+          <span class="color-dot" style="background:black;"></span>
+          <span class="color-dot" style="background:white;"></span>
+          <span class="color-dot" style="background:orange;"></span>
+          <span class="color-dot" style="background:blue;"></span>
+          <span class="color-dot" style="background:#222;"></span>
+        </div>
+        <div class="cap-title">Piping Caps</div>
+        <div class="cap-type">Embroidery</div>
+        <div class="cap-price">₹207 each for 50 Caps</div>
+      </div>
+
+      <!-- Cap 4 -->
+      <div class="cap-card">
+       <a href="allpolocostmize.html"> <img src="https://printo-s3.dietpixels.net/site/20220713_164903444314_567c19_Product_76.jpg?quality=70&format=webp&w=640" alt="Tipping Caps"></a>
+        <div class="color-options">
+          <span class="color-dot" style="background:black;"></span>
+          <span class="color-dot" style="background:white;"></span>
+          <span class="color-dot" style="background:orange;"></span>
+          <span class="color-dot" style="background:blue;"></span>
+          <span class="color-dot" style="background:#222;"></span>
+        </div>
+        <div class="cap-title">Tipping Caps</div>
+        <div class="cap-type">Embroidery</div>
+        <div class="cap-price">₹207 each for 50 Caps</div>
+      </div>
+
+    </div>
+  </section>
+  <section class="caps-section">
+    <div class="caps-title">Shop By Premium Flasks</div>
+
+    <div class="caps-container">
+      
+      <!-- Cap 1 -->
+      <div class="cap-card">
+        <img src="https://printo-s3.dietpixels.net/site/20220713_164903444314_567c19_Product_76.jpg?quality=70&format=webp&w=640" alt="Classic Caps">
+        <div class="color-options">
+          <span class="color-dot" style="background:black;"></span>
+          <span class="color-dot" style="background:white;"></span>
+          <span class="color-dot" style="background:orange;"></span>
+          <span class="color-dot" style="background:blue;"></span>
+          <span class="color-dot" style="background:gray;"></span>
+          <span class="color-dot" style="background:pink;"></span>
+          <span class="color-dot" style="background:purple;"></span>
+        </div>
+        <div class="cap-title">Classic Caps</div>
+        <div class="cap-type">Digital Printing</div>
+        <div class="cap-price">₹334 for each 5 Caps</div>
+      </div>
+
+      <!-- Cap 2 -->
+      <div class="cap-card">
+        <img src="https://printo-s3.dietpixels.net/site/20220714_091029094898_4e5554_Product_84.jpg?quality=70&format=webp&w=640" alt="Line stitching caps">
+        <div class="color-options">
+          <span class="color-dot" style="background:black;"></span>
+          <span class="color-dot" style="background:white;"></span>
+          <span class="color-dot" style="background:orange;"></span>
+          <span class="color-dot" style="background:blue;"></span>
+          <span class="color-dot" style="background:gray;"></span>
+          <span class="color-dot" style="background:pink;"></span>
+          <span class="color-dot" style="background:purple;"></span>
+        </div>
+        <div class="cap-title">Line stitching caps</div>
+        <div class="cap-type">Embroidery</div>
+        <div class="cap-price">₹207 each for 50 Caps</div>
+      </div>
+
+      <!-- Cap 3 -->
+      <div class="cap-card">
+        <img src="https://printo-s3.dietpixels.net/site/20220714_130259868641_035b4a_Glaze_Spill_Free_White_Bottle_1.jpg?quality=70&format=webp&w=640" alt="Piping Caps">
+        <div class="color-options">
+          <span class="color-dot" style="background:black;"></span>
+          <span class="color-dot" style="background:white;"></span>
+          <span class="color-dot" style="background:orange;"></span>
+          <span class="color-dot" style="background:blue;"></span>
+          <span class="color-dot" style="background:#222;"></span>
+        </div>
+        <div class="cap-title">Piping Caps</div>
+        <div class="cap-type">Embroidery</div>
+        <div class="cap-price">₹207 each for 50 Caps</div>
+      </div>
+
+      <!-- Cap 4 -->
+      <div class="cap-card">
+        <img src="https://printo-s3.dietpixels.net/site/20220714_130259868641_035b4a_Glaze_Spill_Free_White_Bottle_1.jpg?quality=70&format=webp&w=640" alt="Tipping Caps">
+        <div class="color-options">
+          <span class="color-dot" style="background:black;"></span>
+          <span class="color-dot" style="background:white;"></span>
+          <span class="color-dot" style="background:orange;"></span>
+          <span class="color-dot" style="background:blue;"></span>
+          <span class="color-dot" style="background:#222;"></span>
+        </div>
+        <div class="cap-title">Tipping Caps</div>
+        <div class="cap-type">Embroidery</div>
+        <div class="cap-price">₹207 each for 50 Caps</div>
+      </div>
+
+    </div>
+  </section>
+
+    <section class="caps-section">
+      <div class="caps-title">Shop By Premium Mugs</div>
+  
+      <div class="caps-container">
+        
+        <!-- Cap 1 -->
+        <div class="cap-card">
+         <a href="capcostmiuze.html"><img src="https://printo-s3.dietpixels.net/site/2024/Leatherette%20Acrylic%20Frame/Cap_1721130625.jpg?quality=70&format=webp&w=640" alt="Classic Caps"></a>
+          <div class="color-options">
+            <span class="color-dot" style="background:black;"></span>
+            <span class="color-dot" style="background:white;"></span>
+            <span class="color-dot" style="background:orange;"></span>
+            <span class="color-dot" style="background:blue;"></span>
+            <span class="color-dot" style="background:gray;"></span>
+            <span class="color-dot" style="background:pink;"></span>
+            <span class="color-dot" style="background:purple;"></span>
+          </div>
+          <div class="cap-title">Classic Caps</div>
+          <div class="cap-type">Digital Printing</div>
+          <div class="cap-price">₹334 for each 5 Caps</div>
+        </div>
+  
+        <!-- Cap 2 -->
+        <div class="cap-card">
+         <a href="capcostmiuze.html"><img src="https://printo-s3.dietpixels.net/site/20230719_112025575215_e5bc9a_Line-stiching.jpg?quality=70&format=webp&w=640" alt="Line stitching caps"></a>
+          <div class="color-options">
+            <span class="color-dot" style="background:black;"></span>
+            <span class="color-dot" style="background:white;"></span>
+            <span class="color-dot" style="background:orange;"></span>
+            <span class="color-dot" style="background:blue;"></span>
+            <span class="color-dot" style="background:gray;"></span>
+            <span class="color-dot" style="background:pink;"></span>
+            <span class="color-dot" style="background:purple;"></span>
+          </div>
+          <div class="cap-title">Line stitching caps</div>
+          <div class="cap-type">Embroidery</div>
+          <div class="cap-price">₹207 each for 50 Caps</div>
+        </div>
+  
+        <!-- Cap 3 -->
+        <div class="cap-card">
+         <a  href="capcostmiuze.html"> <img src="https://printo-s3.dietpixels.net/site/20230719_112030914485_1da444_piping.jpg?quality=70&format=webp&w=640" alt="Piping Caps">
+          <div class="color-options">
+            <span class="color-dot" style="background:black;"></span>
+            <span class="color-dot" style="background:white;"></span>
+            <span class="color-dot" style="background:orange;"></span>
+            <span class="color-dot" style="background:blue;"></span>
+            <span class="color-dot" style="background:#222;"></span>
+          </div>
+          <div class="cap-title">Piping Caps</div>
+          <div class="cap-type">Embroidery</div>
+          <div class="cap-price">₹207 each for 50 Caps</div>
+        </div>
+  
+        <!-- Cap 4 -->
+        <div class="cap-card">
+          <a href="capcostmiuze.html"><img src="https://printo-s3.dietpixels.net/site/20230719_112037745893_bd9f0d_tipping.jpg?quality=70&format=webp&w=640" alt="Tipping Caps"></a>
+          <div class="color-options">
+            <span class="color-dot" style="background:black;"></span>
+            <span class="color-dot" style="background:white;"></span>
+            <span class="color-dot" style="background:orange;"></span>
+            <span class="color-dot" style="background:blue;"></span>
+            <span class="color-dot" style="background:#222;"></span>
+          </div>
+          <div class="cap-title">Tipping Caps</div>
+          <div class="cap-type">Embroidery</div>
+          <div class="cap-price">₹207 each for 50 Caps</div>
+        </div>
+  
+      </div>
+    </section>
+  
+    <div class="faq-section">
+        <div class="faq-title">Frequently Asked Questions</div>
+        <div class="faq-container">
+          
+          <!-- Column 1 -->
+          <div class="faq-column">
+            <div class="faq-item">
+              <div class="faq-question">
+                Can I print my own design, or do you provide design services?
+                <span class="plus">+</span>
+              </div>
+              <div class="faq-answer">
+                Yes, you can upload your own design or ask us to help with design services.
+              </div>
+            </div>
+      
+            <div class="faq-item">
+              <div class="faq-question">
+                What is the minimum order quantity for custom t-shirt printing?
+                <span class="plus">+</span>
+              </div>
+              <div class="faq-answer">
+                The minimum quantity typically starts at 5 units, depending on your design.
+              </div>
+            </div>
+      
+            <div class="faq-item">
+              <div class="faq-question">
+                What file format should my design be in for printing?
+                <span class="plus">+</span>
+              </div>
+              <div class="faq-answer">
+                We prefer high-resolution PNG, JPEG, SVG, or AI files.
+              </div>
+            </div>
+      
+            <div class="faq-item">
+              <div class="faq-question">
+                Can I see a sample or proof before the full order is printed?
+                <span class="plus">+</span>
+              </div>
+              <div class="faq-answer">
+                Yes, we provide digital or physical samples depending on your order type.
+              </div>
+            </div>
+      
+            <div class="faq-item">
+              <div class="faq-question">
+                How to decide which t-shirt to buy?
+                <span class="plus">+</span>
+              </div>
+              <div class="faq-answer">
+                We can help you choose based on your budget, material preference, and design.
+              </div>
+            </div>
+          </div>
+      
+          <!-- Column 2 -->
+          <div class="faq-column">
+            <div class="faq-item">
+              <div class="faq-question">
+                Are there any limitations to the colors I can use in my design?
+                <span class="plus">+</span>
+              </div>
+              <div class="faq-answer">
+                Digital printing supports full color, but embroidery has thread color limits.
+              </div>
+            </div>
+      
+            <div class="faq-item">
+              <div class="faq-question">
+                How long does it take to complete a t-shirt printing order?
+                <span class="plus">+</span>
+              </div>
+              <div class="faq-answer">
+                Generally, orders are completed within 3-7 working days.
+              </div>
+            </div>
+      
+            <div class="faq-item">
+              <div class="faq-question">
+                Do you offer eco-friendly or sustainable t-shirt options?
+                <span class="plus">+</span>
+              </div>
+              <div class="faq-answer">
+                Yes, we offer organic cotton and recycled material options.
+              </div>
+            </div>
+      
+            <div class="faq-item">
+              <div class="faq-question">
+                What types of apparel can I customize for my corporate needs?
+                <span class="plus">+</span>
+              </div>
+              <div class="faq-answer">
+                We offer t-shirts, hoodies, caps, jackets, and more with full customization.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="features-section">
+        <div class="feature-box">
+          <ion-icon name="logo-google" class="icon google-icon"></ion-icon>
+          <h4>Google Review</h4>
+          <p>4.5 star customer rating</p>
+        </div>
+      
+        <div class="feature-box">
+          <ion-icon name="airplane-outline" class="icon"></ion-icon>
+          <h4>Nationwide Delivery</h4>
+          <p>Delivery within India and internationally.</p>
+        </div>
+      
+        <div class="feature-box">
+          <ion-icon name="happy-outline" class="icon"></ion-icon>
+          <h4>Satisfaction Guaranteed</h4>
+          <p>Free replacement or hassle-free refund without questions</p>
+        </div>
+      
+        <div class="feature-box">
+          <ion-icon name="headset-outline" class="icon"></ion-icon>
+          <h4>Support</h4>
+          <p>Have a question? Talk to us today!</p>
+        </div>
+      </div>
+      
+      
+      <!-- Ionicons Scripts -->
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+      
+      
+      <script>
+        const faqItems = document.querySelectorAll(".faq-item");
+      
+        faqItems.forEach(item => {
+          item.addEventListener("click", () => {
+            item.classList.toggle("active");
+          });
+        });
+      </script>
+             
+  
+
+
+</body>
+</html>
